@@ -4,3 +4,6 @@
 [submodule "vim/bundle/dbext"]
 	path = vim/bundle/dbext
 	url = https://github.com/vim-scripts/dbext.vim.git
+[submodule "bash_it"]
+	path = bash_it
+	url = https://github.com/revans/bash-it.git
