@@ -21,6 +21,7 @@ export GIT_HOSTING='git@git.domain.com'
 export EDITOR="vim"
 #export EDITOR="/usr/bin/mate -w"
 export GIT_EDITOR='/usr/bin/mate -w'
+export GIT_EDITOR='/usr/bin/env vim'
 
 # Set the path nginx
 export NGINX_PATH='/opt/nginx'
