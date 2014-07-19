@@ -14,3 +14,9 @@ Switch to the `~/.vim` directory, and fetch submodules:
     git submodule init
     git submodule update
 
+Ubuntu 14.04 we need
+
+    sudo apt-get install ruby1.9.1-dev
+
+in order to get command-t installed
+
