@@ -16,6 +16,7 @@ Switch to the `~/.vim` directory, and fetch submodules:
 
 Ubuntu 14.04 we need
 
+    sudo apt-get install vim-nox
     sudo apt-get install ruby1.9.1-dev
 
 in order to get command-t installed
