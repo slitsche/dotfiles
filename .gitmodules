@@ -7,3 +7,6 @@
 [submodule "bash_it"]
 	path = bash_it
 	url = https://github.com/revans/bash-it.git
+[submodule "vim/bundle/vim-scala"]
+	path = vim/bundle/vim-scala
+	url = https://github.com/derekwyatt/vim-scala.git

@@ -1,0 +1,24 @@
+<project name="backupsync" default="sync" basedir=".">
+    <description>
+        sync two folders recursively
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="/Users/slitsche/newdotfiles"/>
+  <property name="destination"  location="/tmp/dotfiles"/>
+
+  <target name="sync"
+        description="generate the distribution" >
+    <copy todir="${destination}">
+      <fileset dir="${src}"/>
+    </copy>
+
+  </target>
+
+  <target name="test"
+        description="test selection of missing files, to be deleted from target">
+      <delete >
+          <fileset dir="${destination}" includes="**/*"/>
+      </delete>
+  </target>
+</project>
+
