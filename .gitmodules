@@ -16,3 +16,6 @@
 [submodule "vim/bundle/vim-gnupg"]
 	path = vim/bundle/vim-gnupg
 	url = https://github.com/jamessan/vim-gnupg.git
+[submodule "vim/bundle/vimClojure"]
+	path = vim/bundle/vimClojure
+	url = https://github.com/vim-scripts/VimClojure.git
