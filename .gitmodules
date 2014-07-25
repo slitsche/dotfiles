@@ -19,3 +19,6 @@
 [submodule "vim/bundle/vimClojure"]
 	path = vim/bundle/vimClojure
 	url = https://github.com/vim-scripts/VimClojure.git
+[submodule "vim/bundle/paredit-vim"]
+	path = vim/bundle/paredit-vim
+	url = https://github.com/dgrnbrg/paredit-vim.git
