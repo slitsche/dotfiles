@@ -43,3 +43,12 @@ export TODO="t"
 
 # Load Bash It
 source $BASH_IT/bash_it.sh
+
+##
+# Your previous /Users/slitsche/.bash_profile file was backed up as /Users/slitsche/.bash_profile.macports-saved_2014-11-13_at_10:01:29
+##
+
+# MacPorts Installer addition on 2014-11-13_at_10:01:29: adding an appropriate PATH variable for use with MacPorts.
+#export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+
