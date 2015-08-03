@@ -16,12 +16,15 @@
 [submodule "vim/bundle/vim-gnupg"]
 	path = vim/bundle/vim-gnupg
 	url = https://github.com/jamessan/vim-gnupg.git
-[submodule "vim/bundle/vimClojure"]
-	path = vim/bundle/vimClojure
-	url = https://github.com/vim-scripts/VimClojure.git
 [submodule "vim/bundle/paredit-vim"]
 	path = vim/bundle/paredit-vim
 	url = https://github.com/dgrnbrg/paredit-vim.git
 [submodule "vim/bundle/vim-fireplace"]
 	path = vim/bundle/vim-fireplace
 	url = https://github.com/tpope/vim-fireplace.git
+[submodule "vim/bundle/rainbow_parentheses.vim"]
+	path = vim/bundle/rainbow_parentheses.vim
+	url = git@github.com:kien/rainbow_parentheses.vim.git
+[submodule "vim/bundle/vim-clojure-static"]
+	path = vim/bundle/vim-clojure-static
+	url = https://github.com/guns/vim-clojure-static
