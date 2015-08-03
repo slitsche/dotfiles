@@ -76,8 +76,12 @@
     set list
     set listchars=tab:▸\ ,trail:.,nbsp:%
     "set listchars=tab:▸\ ,eol:¬,trail:.,nbsp:%
+    :let mapleader = ","
+
     filetype on
     au BufNewFile,BufRead *.sql_diff set filetype=sql
 
     call pathogen#infect()
+
+    au VimEnter * RainbowParenthesesToggle
 
