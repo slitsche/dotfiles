@@ -1,0 +1,35 @@
+--\set QUIET on
+
+\pset linestyle unicode
+\set HISTCONTROL ignoreboth
+\set HISTSIZE 10000
+
+\set PSQL_EDITOR 'vim -c ":set ft=sql"'
+\set cachehit 'SELECT sum(heap_blks_read) as heap_read, sum(heap_blks_hit)  as heap_hit, sum(heap_blks_hit) / (sum(heap_blks_hit) + sum(heap_blks_read)) as ratio FROM pg_statio_user_tables;'
+
+
+\set locks  'SELECT bl.pid AS blocked_pid, a.usename AS blocked_user, kl.pid AS blocking_pid, ka.usename AS blocking_user, a.query AS blocked_statement FROM pg_catalog.pg_locks bl JOIN pg_catalog.pg_stat_activity a ON bl.pid = a.pid JOIN pg_catalog.pg_locks kl JOIN pg_catalog.pg_stat_activity ka ON kl.pid = ka.pid ON bl.transactionid = kl.transactionid AND bl.pid != kl.pid WHERE NOT bl.granted;'
+
+\set missidx 'SELECT relname, 100 * idx_scan / (seq_scan + idx_scan) percent_of_times_index_used, n_live_tup rows_in_table  FROM pg_stat_user_tables ORDER BY n_live_tup DESC;'
+
+--\set PROMPT1 '%[%033[2;36m%][%`date "+%Y-%m-%d %H:%M:%S"`]%[%033[0m%] %M/%[%033[1m%]%/%[%033[0m%]%R%#%x '
+--\set PROMPT2 '%[%033[2;36m%][%`date "+%Y-%m-%d %H:%M:%S"`]%[%033[0m%] %M/%[%033[1m%]%/%[%033[0m%]%R%#%x '
+
+-- this will work only on psql version 9.3
+--select case when db = 'zal' then 'wh' when db ~ '^wh' then 'wh' else db end as "DBCLASS" from coalesce( substring(current_database() from E'_(\\D+)\\d*_db$'), current_database() ) as x(db)
+--\gset
+
+--\set HISTFILE ~/.psql_history- :DBCLASS
+
+\set QUIET off
+
+\set uptime 'select now() - pg_postmaster_start_time() AS uptime;'
+
+\echo 'Administrative queries'
+\echo '\t\t:uptime \tServer uptime'
+\echo '\t\t:locks  \tLock info'
+\echo '\t\t:missidx\tTable scans'
+\echo '\t\t:cachehit\tCache hit ratio'
+
+--\set menu '\\i ~/.psqrc'
+
