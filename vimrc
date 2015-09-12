@@ -83,5 +83,4 @@
 
     call pathogen#infect()
 
-    au VimEnter * RainbowParenthesesToggle
 
