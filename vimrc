@@ -83,4 +83,12 @@
 
     call pathogen#infect()
 
+    " setup for dbext
+    let g:dbext_default_profile_localtest = 'type=PGSQL:user=postgres:host=localhost:dbname=local_test_db:login_script='
+    "let g:dbext_default_login_script_dir = ''
+    augroup project1
+         au!
+         " Automatically choose the correct dbext profile
+         autocmd BufNewFile,BufRead */sqlanalyze/* DBSetOption profile=localtest
+     augroup end
 
