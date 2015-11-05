@@ -74,14 +74,18 @@
     set statusline+=%*
 
     set list
-    set listchars=tab:▸\ ,trail:.,nbsp:%
-    "set listchars=tab:▸\ ,eol:¬,trail:.,nbsp:%
+    "set listchars=tab:▸\ ,trail:.,nbsp:%
+    set listchars=tab:▸\ ,eol:¬,trail:.,nbsp:%
     :let mapleader = ","
 
     filetype on
     au BufNewFile,BufRead *.sql_diff set filetype=sql
 
     call pathogen#infect()
+
+    " ======= setup ack as :grep ===========
+    set grepprg=ack\ --nogroup\ --column\ $*
+    set grepformat=%f:%l:%c:%m
 
 " Bind nohl
 " Removes highlight of your last search
