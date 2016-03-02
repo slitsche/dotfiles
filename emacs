@@ -46,11 +46,6 @@ Return a list of installed packages or nil for every skipped package."
 (global-relative-line-numbers-mode)
 ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
-;; https://bitbucket.org/lyro/evil/issues/565/word-commands-do-not-respect-word
-(dolist (c (string-to-list ":_-?!#*"))
-  (modify-syntax-entry c "w" clojure-mode-syntax-table)
-  (modify-syntax-entry c "w" emacs-lisp-mode-syntax-table))
-
 ;; TODO
 ;(require 'powerline)
 ;(powerline-default-theme)
@@ -63,8 +58,15 @@ Return a list of installed packages or nil for every skipped package."
 (setq projectile-completion-system 'helm)
 (helm-projectile-on) ; this call yielded an ugly output in minibuffer. seems to work.
 
+;; https://bitbucket.org/lyro/evil/issues/565/word-commands-do-not-respect-word
+(defun sli-clojure-mode-init ()
+  "For evil mode and clojure the word boundaries are differernt."
+  (dolist (c (string-to-list ":_-?!#*"))
+    (modify-syntax-entry c "w" clojure-mode-syntax-table)
+    (modify-syntax-entry c "w" emacs-lisp-mode-syntax-table)))
+
 (add-hook 'clojure-mode-hook #'paredit-mode)
-;(add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'clojure-mode-hook #'sli-clojure-mode-init)
 ;; http://ergoemacs.org/emacs/emacs_highlight_parenthesis.html
 (show-paren-mode 1)
 (setq show-paren-style 'expression)
