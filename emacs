@@ -58,12 +58,49 @@ Return a list of installed packages or nil for every skipped package."
 (setq projectile-completion-system 'helm)
 (helm-projectile-on) ; this call yielded an ugly output in minibuffer. seems to work.
 
+(defun sli-find-tag-default-bounds ()
+  "Determine the boundaries of the default tag, based on text at point.
+Return a cons cell with the beginning and end of the found tag.
+If there is no plausible default, return nil."
+  (let (from to bound)
+    (when (or (progn
+		;; Look at text around `point'.
+		(save-excursion
+		  (skip-syntax-backward "w") (setq from (point)))
+		(save-excursion
+		  (skip-syntax-forward "w") (setq to (point)))
+		(> to from))
+	      ;; Look between `line-beginning-position' and `point'.
+	      (save-excursion
+		(and (setq bound (line-beginning-position))
+		     (skip-syntax-backward "^w" bound)
+		     (> (setq to (point)) bound)
+		     (skip-syntax-backward "w")
+		     (setq from (point))))
+	      ;; Look between `point' and `line-end-position'.
+	      (save-excursion
+		(and (setq bound (line-end-position))
+		     (skip-syntax-forward "^w" bound)
+		     (< (setq from (point)) bound)
+		     (skip-syntax-forward "w")
+		     (setq to (point)))))
+      (cons from to))))
+
+(defun sli-find-tag-clojure ()
+  "Determine default tag to search for, based on text at point.
+If there is no plausible default, return nil."
+  (let ((bounds (sli-find-tag-default-bounds)))
+    (when bounds
+      (buffer-substring-no-properties (car bounds) (cdr bounds)))))
+
 ;; https://bitbucket.org/lyro/evil/issues/565/word-commands-do-not-respect-word
 (defun sli-clojure-mode-init ()
   "For evil mode and clojure the word boundaries are differernt."
   (dolist (c (string-to-list ":_-?!#*"))
     (modify-syntax-entry c "w" clojure-mode-syntax-table)
-    (modify-syntax-entry c "w" emacs-lisp-mode-syntax-table)))
+    (modify-syntax-entry c "w" emacs-lisp-mode-syntax-table))
+  (setq find-tag-default-function 'sli-find-tag-clojure))
+
 
 (add-hook 'clojure-mode-hook #'paredit-mode)
 (add-hook 'clojure-mode-hook #'sli-clojure-mode-init)
