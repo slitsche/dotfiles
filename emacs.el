@@ -143,12 +143,14 @@ If there is no plausible default, return nil."
 
 ;(require 'markdown-mode)
 
+;; ============= Lisp ==============
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+
+
 ;;; ============ Python ============
 (defun sli-python-mode-init ()
   "For evil mode and clojure the word boundaries are differernt."
-  (dolist (c (string-to-list ":_-?!#*"))
-    (modify-syntax-entry c "w" python-mode-syntax-table)
-    )
+  (modify-syntax-entry "_" "w" python-mode-syntax-table)
   (setq find-tag-default-function 'sli-find-tag-clojure))
 
 (add-hook 'python-mode-hook 'sli-python-mode-init)
