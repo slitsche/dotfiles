@@ -4,7 +4,8 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 
-(setq package-enable-at-startup nil)
+;; https://www.masteringemacs.org/article/what-is-new-in-emacs-24-part-2
+;(setq package-enable-at-startup nil)
 (package-initialize)
 
 (defun ensure-package-installed (&rest packages)
@@ -34,6 +35,7 @@ Return a list of installed packages or nil for every skipped package."
 			  'clojure-mode
 			  'cider
 			  'paredit
+			  'markdown-mode
 			  'rainbow-delimiters
 			  'relative-line-numbers
 			  'powerline
@@ -134,3 +136,19 @@ If there is no plausible default, return nil."
 
 ; TODO: (define-key clojure-mode-map (kbd "F12") 'cider-namespace-refresh)
 (global-set-key (kbd "<f12>") 'cider-namespace-refresh)
+
+
+(setq sql-font-lock-buffers '(sql-mode sql-interactive-mode))
+(setq comint-scroll-to-bottom-on-output t)
+
+;(require 'markdown-mode)
+
+;;; ============ Python ============
+(defun sli-python-mode-init ()
+  "For evil mode and clojure the word boundaries are differernt."
+  (dolist (c (string-to-list ":_-?!#*"))
+    (modify-syntax-entry c "w" python-mode-syntax-table)
+    )
+  (setq find-tag-default-function 'sli-find-tag-clojure))
+
+(add-hook 'python-mode-hook 'sli-python-mode-init)
