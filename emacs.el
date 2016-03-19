@@ -34,6 +34,7 @@ Return a list of installed packages or nil for every skipped package."
 			  'ibuffer
 			  'clojure-mode
 			  'cider
+			  'ac-cider
 			  'paredit
 			  'markdown-mode
 			  'rainbow-delimiters
@@ -104,9 +105,17 @@ If there is no plausible default, return nil."
     (modify-syntax-entry c "w" emacs-lisp-mode-syntax-table))
   (setq find-tag-default-function 'sli-find-tag-clojure))
 
-
+;(require 'ac-cider)
 (add-hook 'clojure-mode-hook #'paredit-mode)
 (add-hook 'clojure-mode-hook #'sli-clojure-mode-init)
+(add-hook 'clojure-mode-hook #'eldoc-mode)
+(add-hook 'cider-mode-hook #'ac-cider-setup)
+(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+(eval-after-load "auto-complete"
+  '(progn
+     (add-to-list 'ac-modes 'cider-mode)
+     (add-to-list 'ac-modes 'cider-repl-mode)))
+
 ;; http://ergoemacs.org/emacs/emacs_highlight_parenthesis.html
 (show-paren-mode 1)
 (setq show-paren-style 'expression)
