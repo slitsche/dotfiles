@@ -47,6 +47,7 @@ Return a list of installed packages or nil for every skipped package."
 (evil-mode t)
 (windmove-default-keybindings)
 (setq column-number-mode t)
+(set-face-attribute 'default nil :height 140)
 ;; https://github.com/Fanael/relative-line-numbers
 (global-relative-line-numbers-mode)
 ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
