@@ -161,7 +161,19 @@ If there is no plausible default, return nil."
 ;;; ============ Python ============
 (defun sli-python-mode-init ()
   "For evil mode and clojure the word boundaries are differernt."
-  (modify-syntax-entry "_" "w" python-mode-syntax-table)
+  (modify-syntax-entry ?_ "w" python-mode-syntax-table)
   (setq find-tag-default-function 'sli-find-tag-clojure))
 
 (add-hook 'python-mode-hook 'sli-python-mode-init)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (dichromacy tsdh-light))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
