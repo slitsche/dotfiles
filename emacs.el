@@ -31,18 +31,18 @@ Return a list of installed packages or nil for every skipped package."
 (ensure-package-installed 'evil
                           'projectile
                           'magit
-			  'ibuffer
-			  'clojure-mode
-			  'cider
-			  'ac-cider
-			  'paredit
-			  'markdown-mode
-			  'rainbow-delimiters
-			  'relative-line-numbers
-			  'powerline
-			  'projectile
-			  'helm-projectile
-			  'helm)
+                          'ibuffer
+                          'clojure-mode
+                          'cider
+                          'ac-cider
+                          'paredit
+                          'markdown-mode
+                          'rainbow-delimiters
+                          'relative-line-numbers
+                          'powerline
+                          'projectile
+                          'helm-projectile
+                          'helm)
 
 (evil-mode t)
 (windmove-default-keybindings)
@@ -71,26 +71,26 @@ Return a cons cell with the beginning and end of the found tag.
 If there is no plausible default, return nil."
   (let (from to bound)
     (when (or (progn
-		;; Look at text around `point'.
-		(save-excursion
-		  (skip-syntax-backward "w") (setq from (point)))
-		(save-excursion
-		  (skip-syntax-forward "w") (setq to (point)))
-		(> to from))
-	      ;; Look between `line-beginning-position' and `point'.
-	      (save-excursion
-		(and (setq bound (line-beginning-position))
-		     (skip-syntax-backward "^w" bound)
-		     (> (setq to (point)) bound)
-		     (skip-syntax-backward "w")
-		     (setq from (point))))
-	      ;; Look between `point' and `line-end-position'.
-	      (save-excursion
-		(and (setq bound (line-end-position))
-		     (skip-syntax-forward "^w" bound)
-		     (< (setq from (point)) bound)
-		     (skip-syntax-forward "w")
-		     (setq to (point)))))
+                ;; Look at text around `point'.
+                (save-excursion
+                  (skip-syntax-backward "w") (setq from (point)))
+                (save-excursion
+                  (skip-syntax-forward "w") (setq to (point)))
+                (> to from))
+              ;; Look between `line-beginning-position' and `point'.
+              (save-excursion
+                (and (setq bound (line-beginning-position))
+                     (skip-syntax-backward "^w" bound)
+                     (> (setq to (point)) bound)
+                     (skip-syntax-backward "w")
+                     (setq from (point))))
+              ;; Look between `point' and `line-end-position'.
+              (save-excursion
+                (and (setq bound (line-end-position))
+                     (skip-syntax-forward "^w" bound)
+                     (< (setq from (point)) bound)
+                     (skip-syntax-forward "w")
+                     (setq to (point)))))
       (cons from to))))
 
 (defun sli-find-tag-clojure ()
@@ -178,3 +178,17 @@ If there is no plausible default, return nil."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;;; ============ ORG ============
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cb" 'org-iswitchb)
+ ;; Make windmove work in org-mode:
+(add-hook 'org-shiftup-final-hook 'windmove-up)
+(add-hook 'org-shiftleft-final-hook 'windmove-left)
+(add-hook 'org-shiftdown-final-hook 'windmove-down)
+(add-hook 'org-shiftright-final-hook 'windmove-right)
+(setq org-catch-invisible-edits 'show-and-error)
+(setq org-agenda-files (list "/Users/slitsche/Documents/org/"))
