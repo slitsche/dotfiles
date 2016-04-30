@@ -106,7 +106,9 @@ If there is no plausible default, return nil."
   (dolist (c (string-to-list ":_-?!#*"))
     (modify-syntax-entry c "w" clojure-mode-syntax-table)
     (modify-syntax-entry c "w" emacs-lisp-mode-syntax-table))
-  (setq find-tag-default-function 'sli-find-tag-clojure))
+  (setq find-tag-default-function 'sli-find-tag-clojure)
+  (put-clojure-indent 'fact 1)
+  (put-clojure-indent 'facts 1))
 
 ;(require 'ac-cider)
 (add-hook 'clojure-mode-hook #'paredit-mode)
