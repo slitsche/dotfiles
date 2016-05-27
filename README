@@ -2,11 +2,12 @@ Installation:
 
     git clone git://github.com/sli67/dotfiles.git ~/dotfiles
 
-Create symlinks:
+Create symlinks and configure git:
 
     ln -s ~/dotfiles/vimrc ~/.vimrc
     ln -s ~/dotfiles/vim ~/.vim
     ln -s ~/dotfiles/gvimrc ~/.gvimrc
+    git config --global core.excludesFile ~/dotfiles/gitignore_globa
 
 Switch to the `~/.vim` directory, and fetch submodules:
 
