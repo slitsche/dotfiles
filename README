@@ -7,6 +7,7 @@ Create symlinks and configure git:
     ln -s ~/dotfiles/vimrc ~/.vimrc
     ln -s ~/dotfiles/vim ~/.vim
     ln -s ~/dotfiles/gvimrc ~/.gvimrc
+    ln -s ~/dotfiles/gpg.conf ~/.gnupg/gpg.conf
     git config --global core.excludesFile ~/dotfiles/gitignore_globa
 
 Switch to the `~/.vim` directory, and fetch submodules:
