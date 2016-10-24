@@ -30,6 +30,7 @@ Return a list of installed packages or nil for every skipped package."
 
 (ensure-package-installed 'evil
                           'projectile
+                          'slime
                           'magit
                           'ibuffer
                           'clojure-mode
@@ -158,8 +159,9 @@ If there is no plausible default, return nil."
 ;(require 'markdown-mode)
 
 ;; ============= Lisp ==============
+(require 'slime)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-
+(setq inferior-lisp-program "/usr/local/bin/ccl")
 
 ;;; ============ Python ============
 (defun sli-python-mode-init ()
