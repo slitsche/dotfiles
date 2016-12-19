@@ -28,22 +28,24 @@ Return a list of installed packages or nil for every skipped package."
 ;; Activate installed packages
 (package-initialize)
 
-(ensure-package-installed 'evil
-                          'projectile
-                          'slime
-                          'magit
-                          'ibuffer
-                          'clojure-mode
+(ensure-package-installed 'ac-cider
                           'cider
-                          'ac-cider
-                          'paredit
+                          'clojure-mode
+                          'evil
+                          'go-mode
+                          'helm
+                          'helm-projectile
+                          'ibuffer
+                          'magit
                           'markdown-mode
-                          'rainbow-delimiters
-                          'relative-line-numbers
+                          'paredit
                           'powerline
                           'projectile
-                          'helm-projectile
-                          'helm)
+                          'projectile
+                          'rainbow-delimiters
+                          'relative-line-numbers
+                          'slime
+                          'yaml-mode)
 
 (evil-mode t)
 (windmove-default-keybindings)
