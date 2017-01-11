@@ -6,7 +6,6 @@
 
 ;; https://www.masteringemacs.org/article/what-is-new-in-emacs-24-part-2
 ;(setq package-enable-at-startup nil)
-(package-initialize)
 
 (defun ensure-package-installed (&rest packages)
   "Assure every package is installed, ask for installation if it’s not.
@@ -32,6 +31,8 @@ Return a list of installed packages or nil for every skipped package."
                           'cider
                           'clojure-mode
                           'evil
+                          'go-autocomplete
+                          'go-eldoc
                           'go-mode
                           'helm
                           'helm-projectile
@@ -144,6 +145,10 @@ If there is no plausible default, return nil."
 (setq whitespace-style (quote
    ( face trailing tabs newline tab-mark ))) ;newline-mark
 
+(setq sql-font-lock-buffers '(sql-mode sql-interactive-mode))
+(setq comint-scroll-to-bottom-on-output t)
+
+;; ================== Clojure =================
 ;; reload namespace
 (defun cider-namespace-refresh ()
   (interactive)
@@ -155,10 +160,26 @@ If there is no plausible default, return nil."
 (global-set-key (kbd "<f12>") 'cider-namespace-refresh)
 
 
-(setq sql-font-lock-buffers '(sql-mode sql-interactive-mode))
-(setq comint-scroll-to-bottom-on-output t)
+;; ============= GO ==============
+(defun my-go-mode-hook ()
+  (setq compile-command "go build -v && go test -v && go vet && golint")
+  (define-key (current-local-map) "\C-c\C-c" 'compile)
+  (go-eldoc-setup)
+  (setq gofmt-command "goimports") ;; manages imports
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (setq tab-width 4)
+  ;(local-set-key (kbd "C-]") 'godef-jump) ;; TODO: evil has C-]
+  )
 
-;(require 'markdown-mode)
+(add-hook 'go-mode-hook 'my-go-mode-hook) 
+;; autocomplete:
+(ac-config-default)
+(require 'auto-complete-config)
+(require 'go-autocomplete)
+
+;; configure Lint
+(add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
+(require 'golint)
 
 ;; ============= Lisp ==============
 (require 'slime)
