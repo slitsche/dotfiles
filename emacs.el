@@ -31,6 +31,7 @@ Return a list of installed packages or nil for every skipped package."
                           'cider
                           'clojure-mode
                           'evil
+                          'fill-column-indicator
                           'go-autocomplete
                           'go-eldoc
                           'go-mode
@@ -144,7 +145,8 @@ If there is no plausible default, return nil."
 (global-whitespace-mode 1)
 (setq whitespace-style (quote
    ( face trailing tabs newline tab-mark ))) ;newline-mark
-
+(require 'fill-column-indicator)
+(setq fci-rule-column 80)
 (setq sql-font-lock-buffers '(sql-mode sql-interactive-mode))
 (setq comint-scroll-to-bottom-on-output t)
 
@@ -190,7 +192,8 @@ If there is no plausible default, return nil."
 (defun sli-python-mode-init ()
   "For evil mode and clojure the word boundaries are differernt."
   (modify-syntax-entry ?_ "w" python-mode-syntax-table)
-  (setq find-tag-default-function 'sli-find-tag-clojure))
+  (setq find-tag-default-function 'sli-find-tag-clojure)
+  (fci-mode))
 
 (add-hook 'python-mode-hook 'sli-python-mode-init)
 (custom-set-variables
