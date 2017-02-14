@@ -98,6 +98,17 @@ If there is no plausible default, return nil."
                      (setq to (point)))))
       (cons from to))))
 
+;; ================== Clojure =================
+;; reload namespace
+(defun cider-namespace-refresh ()
+  (interactive)
+  (cider-interactive-eval
+   "(require 'clojure.tools.namespace.repl)
+    (clojure.tools.namespace.repl/refresh)"))
+
+; TODO: (define-key clojure-mode-map (kbd "F12") 'cider-namespace-refresh)
+(global-set-key (kbd "<f12>") 'cider-namespace-refresh)
+
 (defun sli-find-tag-clojure ()
   "Determine default tag to search for, based on text at point.
 If there is no plausible default, return nil."
@@ -113,7 +124,8 @@ If there is no plausible default, return nil."
     (modify-syntax-entry c "w" emacs-lisp-mode-syntax-table))
   (setq find-tag-default-function 'sli-find-tag-clojure)
   (put-clojure-indent 'fact 1)
-  (put-clojure-indent 'facts 1))
+  (put-clojure-indent 'facts 1)
+  (fci-mode))
 
 ;(require 'ac-cider)
 (add-hook 'clojure-mode-hook #'paredit-mode)
@@ -145,24 +157,22 @@ If there is no plausible default, return nil."
 (global-whitespace-mode 1)
 (setq whitespace-style (quote
    ( face trailing tabs newline tab-mark ))) ;newline-mark
+;; https://www.emacswiki.org/emacs/FillColumnIndicator
 (require 'fill-column-indicator)
 (setq fci-rule-column 80)
+
+;; fill-paragraph should adhere to this
+(setq fill-column 80)
+
+;; ================= Markdown =================
+(add-hook 'markdown-mode-hook 'fci-mode) ; enable fill-column-indicator
+
 (setq sql-font-lock-buffers '(sql-mode sql-interactive-mode))
 (setq comint-scroll-to-bottom-on-output t)
 
-;; ================== Clojure =================
-;; reload namespace
-(defun cider-namespace-refresh ()
-  (interactive)
-  (cider-interactive-eval
-   "(require 'clojure.tools.namespace.repl)
-    (clojure.tools.namespace.repl/refresh)"))
-
-; TODO: (define-key clojure-mode-map (kbd "F12") 'cider-namespace-refresh)
-(global-set-key (kbd "<f12>") 'cider-namespace-refresh)
-
 
 ;; ============= GO ==============
+;; http://arenzana.org/2015/Emacs-for-Go/
 (defun my-go-mode-hook ()
   (setq compile-command "go build -v && go test -v && go vet && golint")
   (define-key (current-local-map) "\C-c\C-c" 'compile)
@@ -173,7 +183,7 @@ If there is no plausible default, return nil."
   ;(local-set-key (kbd "C-]") 'godef-jump) ;; TODO: evil has C-]
   )
 
-(add-hook 'go-mode-hook 'my-go-mode-hook) 
+(add-hook 'go-mode-hook 'my-go-mode-hook)
 ;; autocomplete:
 (ac-config-default)
 (require 'auto-complete-config)
