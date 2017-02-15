@@ -162,7 +162,7 @@ If there is no plausible default, return nil."
 (setq fci-rule-column 80)
 
 ;; fill-paragraph should adhere to this
-(setq fill-column 80)
+(setq-default fill-column 80)
 
 ;; ================= Markdown =================
 (add-hook 'markdown-mode-hook 'fci-mode) ; enable fill-column-indicator
