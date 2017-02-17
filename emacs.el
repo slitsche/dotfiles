@@ -43,13 +43,14 @@ Return a list of installed packages or nil for every skipped package."
                           'paredit
                           'powerline
                           'projectile
-                          'projectile
                           'rainbow-delimiters
                           'relative-line-numbers
                           'slime
                           'yaml-mode)
 
 (evil-mode t)
+;;https://www.masteringemacs.org/article/disabling-prompts-emacs
+(fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
 (setq column-number-mode t)
 (setq-default indent-tabs-mode nil)
