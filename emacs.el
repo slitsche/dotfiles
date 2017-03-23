@@ -233,3 +233,4 @@ If there is no plausible default, return nil."
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 (setq org-catch-invisible-edits 'show-and-error)
 (setq org-agenda-files (list "/Users/slitsche/Documents/org/"))
+(add-hook 'org-mode-hook 'org-indent-mode)
