@@ -237,6 +237,16 @@ If there is no plausible default, return nil."
 (add-hook 'org-shiftleft-final-hook 'windmove-left)
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
-(setq org-catch-invisible-edits 'show-and-error)
-(setq org-agenda-files (list "/Users/slitsche/Documents/org/"))
 (add-hook 'org-mode-hook 'org-indent-mode)
+
+(setq org-catch-invisible-edits 'show-and-error)
+(setq org-agenda-files (list "~/Documents/org/"))
+;http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
+;https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
+(setq org-directory "~/Documents/org")
+(setq org-capture-templates
+      '(("a" "My TODO task format." entry
+         (file "todo.org")
+         "* TODO %?
+SCHEDULED: %t")))
