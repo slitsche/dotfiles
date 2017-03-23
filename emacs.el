@@ -100,6 +100,8 @@ If there is no plausible default, return nil."
       (cons from to))))
 
 ;; ================== Clojure =================
+(require 'ac-cider)
+(require 'clj-refactor)
 ;; reload namespace
 (defun cider-namespace-refresh ()
   (interactive)
@@ -119,16 +121,18 @@ If there is no plausible default, return nil."
 
 ;; https://bitbucket.org/lyro/evil/issues/565/word-commands-do-not-respect-word
 (defun sli-clojure-mode-init ()
-  "For evil mode and clojure the word boundaries are differernt."
+  "For evil mode and clojure the word boundaries are different."
   (dolist (c (string-to-list ":_-?!#*"))
     (modify-syntax-entry c "w" clojure-mode-syntax-table)
     (modify-syntax-entry c "w" emacs-lisp-mode-syntax-table))
   (setq find-tag-default-function 'sli-find-tag-clojure)
   (put-clojure-indent 'fact 1)
   (put-clojure-indent 'facts 1)
+  ;;https://github.com/clojure-emacs/clj-refactor.el/wiki/installation
+  (clj-refactor-mode 1)
+  ;(cljr-add-keybindings-with-prefix "C-c C-m")
   (fci-mode))
 
-;(require 'ac-cider)
 (add-hook 'clojure-mode-hook #'paredit-mode)
 (add-hook 'clojure-mode-hook #'sli-clojure-mode-init)
 (add-hook 'clojure-mode-hook #'eldoc-mode)
@@ -138,6 +142,8 @@ If there is no plausible default, return nil."
   '(progn
      (add-to-list 'ac-modes 'cider-mode)
      (add-to-list 'ac-modes 'cider-repl-mode)))
+
+;; ======== END clojure ==========
 
 ;; http://ergoemacs.org/emacs/emacs_highlight_parenthesis.html
 (show-paren-mode 1)
