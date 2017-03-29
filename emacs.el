@@ -29,6 +29,7 @@ Return a list of installed packages or nil for every skipped package."
 
 (ensure-package-installed 'ac-cider
                           'cider
+                          'clj-refactor
                           'clojure-mode
                           'evil
                           'fill-column-indicator
@@ -241,12 +242,29 @@ If there is no plausible default, return nil."
 
 (setq org-catch-invisible-edits 'show-and-error)
 (setq org-agenda-files (list "~/Documents/org/"))
+(setq org-directory "~/Documents/org")
 ;http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
 ;https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
-(setq org-directory "~/Documents/org")
 (setq org-capture-templates
       '(("a" "My TODO task format." entry
          (file "todo.org")
-         "* TODO %?
-SCHEDULED: %t")))
+         "* TODO %?\nSCHEDULED: %t\n%a")
+        ("n" "note" entry
+         (file "todo.org")
+         "* %? :NOTE:\n%U\n%a\n")))
+
+;; http://doc.norang.ca/org-mode.html#CustomAgendaViews
+(setq org-agenda-custom-commands
+      (quote (("n" "Notes" tags "NOTE"
+               ((org-agenda-overriding-header "Notes")
+                (org-tags-match-list-sublevels t))))))
+
+(setq org-tag-alist '(("NOTE" . ?n)))
+(setq org-tags-exclude-from-inheritance '("NOTE"))
+
+;;https://blog.aaronbieber.com/2017/03/19/organizing-notes-with-refile.html
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-allow-creating-parent-nodes 'confirm)
+
