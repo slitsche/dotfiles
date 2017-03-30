@@ -244,7 +244,7 @@ If there is no plausible default, return nil."
 (setq org-agenda-files (list "~/Documents/org/"))
 (setq org-directory "~/Documents/org")
 ;http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
-(setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))))
 ;https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
 (setq org-capture-templates
       '(("a" "My TODO task format." entry
