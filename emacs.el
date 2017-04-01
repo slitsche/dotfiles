@@ -60,6 +60,8 @@ Return a list of installed packages or nil for every skipped package."
 (global-relative-line-numbers-mode)
 ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
+;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
+(fset 'evil-visual-update-x-selection 'ignore)
 ;; TODO
 ;(require 'powerline)
 ;(powerline-default-theme)
