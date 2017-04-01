@@ -133,7 +133,6 @@ If there is no plausible default, return nil."
   (put-clojure-indent 'facts 1)
   ;;https://github.com/clojure-emacs/clj-refactor.el/wiki/installation
   (clj-refactor-mode 1)
-  ;(cljr-add-keybindings-with-prefix "C-c C-m")
   (fci-mode))
 
 (add-hook 'clojure-mode-hook #'paredit-mode)
@@ -158,7 +157,7 @@ If there is no plausible default, return nil."
 (setq recentf-max-menu-items 25)
 ;; key overrides default binding for find-files-read-only
 (global-set-key "\C-x\ \C-r" 'helm-recentf)
-
+(global-set-key "\C-x\ \C-f" 'helm-find-files)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Whitepspace
