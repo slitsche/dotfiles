@@ -32,6 +32,7 @@ Return a list of installed packages or nil for every skipped package."
                           'clj-refactor
                           'clojure-mode
                           'evil
+                          'evil-magit
                           'fill-column-indicator
                           'go-autocomplete
                           'go-eldoc
