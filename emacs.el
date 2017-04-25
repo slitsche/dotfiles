@@ -134,6 +134,8 @@ If there is no plausible default, return nil."
   (put-clojure-indent 'facts 1)
   ;;https://github.com/clojure-emacs/clj-refactor.el/wiki/installation
   (clj-refactor-mode 1)
+  ;(cljr-add-keybindings-with-modifier "C-c r")
+  (yas/minor-mode 1)
   (fci-mode))
 
 (add-hook 'clojure-mode-hook #'paredit-mode)
