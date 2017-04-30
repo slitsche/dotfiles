@@ -243,6 +243,8 @@ If there is no plausible default, return nil."
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 (add-hook 'org-mode-hook 'org-indent-mode)
 
+(when fboundp 'winner-mode
+      (winner-mode 1))
 (setq org-catch-invisible-edits 'show-and-error)
 (setq org-agenda-files (list "~/Documents/org/"))
 (setq org-directory "~/Documents/org")
