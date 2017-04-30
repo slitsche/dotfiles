@@ -49,30 +49,41 @@ Return a list of installed packages or nil for every skipped package."
                           'slime
                           'yaml-mode)
 
-(evil-mode t)
 ;;https://www.masteringemacs.org/article/disabling-prompts-emacs
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
+;; enable window setup history
+;; see for alternatives: http://stackoverflow.com/questions/4732511/in-emacs-can-we-maximize-current-active-window-and-then-restore-it-back-in-mul
+(when (fboundp 'winner-mode)
+      (winner-mode 1))
+
 (setq column-number-mode t)
 (setq-default indent-tabs-mode nil)
 (set-face-attribute 'default nil :height 140)
+
+;; ================== Evil =================
+(evil-mode t)
 ;; https://github.com/Fanael/relative-line-numbers
 (global-relative-line-numbers-mode)
 ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
 ;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
 (fset 'evil-visual-update-x-selection 'ignore)
+;; This is not Vim like, but helps to eval last expression for lispy languages
+;; Cursor does not move back when switching to normal-state
+(setq evil-move-cursor-back nil)
 ;; TODO
 ;(require 'powerline)
 ;(powerline-default-theme)
 ;(powerline-vim-theme)
+
 (defalias 'list-buffers 'ibuffer)
 (require 'helm-config)
 (helm-mode 1)
 (projectile-global-mode)
 (setq projectile-enable-caching t)
 (setq projectile-completion-system 'helm)
-(helm-projectile-on) ; this call yielded an ugly output in minibuffer. seems to work.
+;(helm-projectile-on) ; this call yielded an ugly output in minibuffer. seems to work.
 
 (defun sli-find-tag-default-bounds ()
   "Determine the boundaries of the default tag, based on text at point.
@@ -242,9 +253,6 @@ If there is no plausible default, return nil."
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 (add-hook 'org-mode-hook 'org-indent-mode)
-
-(when fboundp 'winner-mode
-      (winner-mode 1))
 (setq org-catch-invisible-edits 'show-and-error)
 (setq org-agenda-files (list "~/Documents/org/"))
 (setq org-directory "~/Documents/org")
