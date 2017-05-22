@@ -40,9 +40,11 @@ Return a list of installed packages or nil for every skipped package."
                           'helm-projectile
                           'ibuffer
                           'magit
+                          ;'magit-gh-pulls
                           'markdown-mode
+                          'org-bullets
                           'paredit
-                          'powerline
+                          ;'powerline
                           'projectile
                           'rainbow-delimiters
                           'relative-line-numbers
@@ -242,6 +244,7 @@ If there is no plausible default, return nil."
  )
 
 ;;; ============ ORG ============
+(require 'org-bullets)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -253,6 +256,8 @@ If there is no plausible default, return nil."
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 (add-hook 'org-mode-hook 'org-indent-mode)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
 (setq org-catch-invisible-edits 'show-and-error)
 (setq org-agenda-files (list "~/Documents/org/"))
 (setq org-directory "~/Documents/org")
