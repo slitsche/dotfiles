@@ -65,6 +65,8 @@ Return a list of installed packages or nil for every skipped package."
 
 ;; ================== Evil =================
 (evil-mode t)
+;; add evil movements to magit buffers. This changes some magit key bindings
+(require 'evil-magit)
 ;; https://github.com/Fanael/relative-line-numbers
 (global-relative-line-numbers-mode)
 ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
