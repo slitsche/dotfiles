@@ -24,14 +24,17 @@ Return a list of installed packages or nil for every skipped package."
     (package-refresh-contents))
 
 ;; Activate installed packages
+(add-to-list 'load-path "~/.emacs.d/evil")
+(add-to-list 'load-path "~/.emacs.d/evil-magit")
+(require 'evil)
 (package-initialize)
 
 (ensure-package-installed 'ac-cider
                           'cider
                           'clj-refactor
                           'clojure-mode
-                          'evil
-                          'evil-magit
+                          ;'evil
+                          ;'evil-magit
                           'fill-column-indicator
                           'go-autocomplete
                           'go-eldoc
@@ -44,10 +47,7 @@ Return a list of installed packages or nil for every skipped package."
                           'markdown-mode
                           'org-bullets
                           'paredit
-                          ;'powerline
                           'projectile
-                          'rainbow-delimiters
-                          'relative-line-numbers
                           'slime
                           'yaml-mode)
 
@@ -68,7 +68,7 @@ Return a list of installed packages or nil for every skipped package."
 ;; add evil movements to magit buffers. This changes some magit key bindings
 (require 'evil-magit)
 ;; https://github.com/Fanael/relative-line-numbers
-(global-relative-line-numbers-mode)
+(linum-relative-global-mode)
 ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
 ;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
