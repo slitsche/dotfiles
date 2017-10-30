@@ -284,7 +284,14 @@ If there is no plausible default, return nil."
 (setq org-tags-exclude-from-inheritance '("NOTE"))
 
 ;;https://blog.aaronbieber.com/2017/03/19/organizing-notes-with-refile.html
+;; Make it possible to refile with helm
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 
+;; Setup Org Babel for SQL
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sql . t)
+   (sh . t)
+   (emacs-lisp . t)))
