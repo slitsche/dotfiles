@@ -29,10 +29,10 @@ Return a list of installed packages or nil for every skipped package."
 (require 'evil)
 (package-initialize)
 
-(ensure-package-installed 'ac-cider
-                          'cider
+(ensure-package-installed 'cider
                           'clj-refactor
                           'clojure-mode
+                          'company
                           ;'evil
                           ;'evil-magit
                           'fill-column-indicator
@@ -62,6 +62,8 @@ Return a list of installed packages or nil for every skipped package."
 (setq column-number-mode t)
 (setq-default indent-tabs-mode nil)
 (set-face-attribute 'default nil :height 140)
+;; make auto complete always availabe
+(global-company-mode)
 
 ;; ================== Evil =================
 (evil-mode t)
@@ -118,7 +120,6 @@ If there is no plausible default, return nil."
       (cons from to))))
 
 ;; ================== Clojure =================
-(require 'ac-cider)
 (require 'clj-refactor)
 ;; reload namespace
 (defun cider-namespace-refresh ()
@@ -155,12 +156,8 @@ If there is no plausible default, return nil."
 (add-hook 'clojure-mode-hook #'paredit-mode)
 (add-hook 'clojure-mode-hook #'sli-clojure-mode-init)
 (add-hook 'clojure-mode-hook #'eldoc-mode)
-(add-hook 'cider-mode-hook #'ac-cider-setup)
-(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
-(eval-after-load "auto-complete"
-  '(progn
-     (add-to-list 'ac-modes 'cider-mode)
-     (add-to-list 'ac-modes 'cider-repl-mode)))
+;; setup config for Cider Repl
+(add-hook 'clojure-repl-mode-hook #'paredit-mode)
 
 ;; ======== END clojure ==========
 
@@ -210,14 +207,14 @@ If there is no plausible default, return nil."
   )
 
 (add-hook 'go-mode-hook 'my-go-mode-hook)
-;; autocomplete:
-(ac-config-default)
-(require 'auto-complete-config)
-(require 'go-autocomplete)
+;; autocomplete: TODO: check this again if necessary after adding 'company
+;;(ac-config-default)
+;;(require 'auto-complete-config)
+;; (require 'go-autocomplete)
 
 ;; configure Lint
 (add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
-(require 'golint)
+;(require 'golint)
 
 ;; ============= Lisp ==============
 (require 'slime)
@@ -237,13 +234,10 @@ If there is no plausible default, return nil."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (dichromacy tsdh-light))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+ '(custom-enabled-themes (quote (dichromacy tsdh-light)))
+ '(package-selected-packages  ;; TODO: new since version 25 it seems to supersede custom solution
+   (quote
+    (company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
 
 ;;; ============ ORG ============
 (require 'org-bullets)
