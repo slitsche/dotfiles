@@ -63,7 +63,22 @@ Return a list of installed packages or nil for every skipped package."
 (setq-default indent-tabs-mode nil)
 (set-face-attribute 'default nil :height 140)
 ;; make auto complete always availabe
-(global-company-mode)
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-idle-delay 0.9)
+(global-set-key (kbd "M-TAB") #'company-complete)
+
+(defalias 'list-buffers 'ibuffer)
+
+;; ================== Helm && Projectile =================
+(require 'helm-config)
+(helm-mode 1)
+(projectile-global-mode)
+(setq projectile-enable-caching t)
+(setq projectile-completion-system 'helm)
+;; automatically regenerate the tags
+(setq projectile-idle-timer t)
+(setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
+(add-hook 'projectile-idle-timer-hook #'projectile-invalidate-cache)
 
 ;; ================== Evil =================
 (evil-mode t)
@@ -78,19 +93,8 @@ Return a list of installed packages or nil for every skipped package."
 ;; This is not Vim like, but helps to eval last expression for lispy languages
 ;; Cursor does not move back when switching to normal-state
 (setq evil-move-cursor-back nil)
-;; TODO
-;(require 'powerline)
-;(powerline-default-theme)
-;(powerline-vim-theme)
 
-(defalias 'list-buffers 'ibuffer)
-(require 'helm-config)
-(helm-mode 1)
-(projectile-global-mode)
-(setq projectile-enable-caching t)
-(setq projectile-completion-system 'helm)
-;(helm-projectile-on) ; this call yielded an ugly output in minibuffer. seems to work.
-
+;; ================== Clojure =================
 (defun sli-find-tag-default-bounds ()
   "Determine the boundaries of the default tag, based on text at point.
 Return a cons cell with the beginning and end of the found tag.
@@ -119,7 +123,6 @@ If there is no plausible default, return nil."
                      (setq to (point)))))
       (cons from to))))
 
-;; ================== Clojure =================
 (require 'clj-refactor)
 ;; reload namespace
 (defun cider-namespace-refresh ()
@@ -138,18 +141,21 @@ If there is no plausible default, return nil."
     (when bounds
       (buffer-substring-no-properties (car bounds) (cdr bounds)))))
 
-;; https://bitbucket.org/lyro/evil/issues/565/word-commands-do-not-respect-word
 (defun sli-clojure-mode-init ()
   "For evil mode and clojure the word boundaries are different."
+;; https://bitbucket.org/lyro/evil/issues/565/word-commands-do-not-respect-word
   (dolist (c (string-to-list ":_-?!#*"))
     (modify-syntax-entry c "w" clojure-mode-syntax-table)
     (modify-syntax-entry c "w" emacs-lisp-mode-syntax-table))
-  (setq find-tag-default-function 'sli-find-tag-clojure)
+  ;; (setq find-tag-default-function 'sli-find-tag-clojure)
   (put-clojure-indent 'fact 1)
   (put-clojure-indent 'facts 1)
   ;;https://github.com/clojure-emacs/clj-refactor.el/wiki/installation
   (clj-refactor-mode 1)
-  ;(cljr-add-keybindings-with-modifier "C-c r")
+  ;; for clojure we replace the evil binding for evil-jump-to-tag
+  ;; which resolves a symbol with namespace
+  ;;(define-key evil-motion-state-map (kbd "C-]") 'cider-find-var)
+  (define-key (current-local-map) (kbd "<f5>") 'cider-find-var)
   (yas/minor-mode 1)
   (fci-mode))
 
