@@ -64,8 +64,10 @@ Return a list of installed packages or nil for every skipped package."
 (set-face-attribute 'default nil :height 140)
 ;; make auto complete always availabe
 (add-hook 'after-init-hook 'global-company-mode)
-(setq company-idle-delay 0.9)
-(global-set-key (kbd "M-TAB") #'company-complete)
+(setq company-idle-delay nil)
+;; (set-mark-command) I rarely use and it has a secondary binding C-@
+;; so we can use one binding of this command.
+(global-set-key (kbd "C-SPC") #'company-complete)
 
 (defalias 'list-buffers 'ibuffer)
 
@@ -282,6 +284,9 @@ If there is no plausible default, return nil."
 
 (setq org-tag-alist '(("NOTE" . ?n)))
 (setq org-tags-exclude-from-inheritance '("NOTE"))
+
+(add-to-list 'org-structure-template-alist
+             '("C" "#+BEGIN_COMMENT\n?\n#+END_COMMENT" "<!--?-->"))
 
 ;;https://blog.aaronbieber.com/2017/03/19/organizing-notes-with-refile.html
 ;; Make it possible to refile with helm
