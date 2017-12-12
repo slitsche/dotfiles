@@ -29,7 +29,8 @@ Return a list of installed packages or nil for every skipped package."
 (require 'evil)
 (package-initialize)
 
-(ensure-package-installed 'cider
+(ensure-package-installed
+                          'cider
                           'clj-refactor
                           'clojure-mode
                           'company
@@ -41,6 +42,8 @@ Return a list of installed packages or nil for every skipped package."
                           'go-mode
                           'helm
                           'helm-projectile
+                          ;; for html export from org-mode
+                          'htmlize
                           'ibuffer
                           'magit
                           ;'magit-gh-pulls
@@ -64,6 +67,7 @@ Return a list of installed packages or nil for every skipped package."
 (set-face-attribute 'default nil :height 140)
 ;; make auto complete always availabe
 (add-hook 'after-init-hook 'global-company-mode)
+;; I prefer manual triggered completion
 (setq company-idle-delay nil)
 ;; (set-mark-command) I rarely use and it has a secondary binding C-@
 ;; so we can use one binding of this command.
@@ -91,7 +95,7 @@ Return a list of installed packages or nil for every skipped package."
 ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
 ;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
-(fset 'evil-visual-update-x-selection 'ignore)
+;(fset 'evil-visual-update-x-selection 'ignore)
 ;; This is not Vim like, but helps to eval last expression for lispy languages
 ;; Cursor does not move back when switching to normal-state
 (setq evil-move-cursor-back nil)
@@ -237,16 +241,6 @@ If there is no plausible default, return nil."
   (fci-mode))
 
 (add-hook 'python-mode-hook 'sli-python-mode-init)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (dichromacy tsdh-light)))
- '(package-selected-packages  ;; TODO: new since version 25 it seems to supersede custom solution
-   (quote
-    (company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
-
 ;;; ============ ORG ============
 (require 'org-bullets)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
@@ -300,3 +294,18 @@ If there is no plausible default, return nil."
  '((sql . t)
    (sh . t)
    (emacs-lisp . t)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (dichromacy tsdh-light)))
+ '(package-selected-packages
+   (quote
+    (htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
