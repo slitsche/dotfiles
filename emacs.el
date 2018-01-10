@@ -95,7 +95,7 @@ Return a list of installed packages or nil for every skipped package."
 ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
 ;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
-;(fset 'evil-visual-update-x-selection 'ignore)
+(fset 'evil-visual-update-x-selection 'ignore)
 ;; This is not Vim like, but helps to eval last expression for lispy languages
 ;; Cursor does not move back when switching to normal-state
 (setq evil-move-cursor-back nil)
@@ -294,6 +294,13 @@ If there is no plausible default, return nil."
  '((sql . t)
    (sh . t)
    (emacs-lisp . t)))
+;; Fix issue in Tramp when executing region
+;; Tramp assumes the local TMPDIR exists remotely. WHY? TODO.
+;; See John Hitchins remark https://lists.gnu.org/archive/html/emacs-orgmode/2016-01/msg00321.html
+;; and https://lists.gnu.org/archive/html/emacs-orgmode/2016-01/msg00282.html
+(setq temporary-file-directory "/tmp")
+
+;;
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
