@@ -198,6 +198,7 @@ If there is no plausible default, return nil."
 
 ;; fill-paragraph should adhere to this
 (setq-default fill-column 80)
+(add-hook 'text-mode-hook 'auto-fill-mode)
 
 ;; ================= Markdown =================
 (add-hook 'markdown-mode-hook 'fci-mode) ; enable fill-column-indicator
