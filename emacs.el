@@ -72,9 +72,14 @@ Return a list of installed packages or nil for every skipped package."
 ;; (set-mark-command) I rarely use and it has a secondary binding C-@
 ;; so we can use one binding of this command.
 (global-set-key (kbd "C-SPC") #'company-complete)
+;; we replace switch-to-buffer with helm
+(global-set-key (kbd "C-x b") #'helm-mini)
+;(defalias 'list-buffers 'ibuffer)
 
-(defalias 'list-buffers 'ibuffer)
-
+;; Configure imenu via helm: lookup buffer contents
+;; shortcut derived from Eclipse C-o
+(global-set-key (kbd "C-c o") 'helm-imenu)
+(setf imenu-auto-rescan t)
 ;; ================== Helm && Projectile =================
 (require 'helm-config)
 (helm-mode 1)
