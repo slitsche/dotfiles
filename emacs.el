@@ -277,6 +277,9 @@ If there is no plausible default, return nil."
       '(("a" "My TODO task format." entry
          (file "todo.org")
          "* TODO %?\nSCHEDULED: %t\n%a")
+        ("r" "read" entry
+         (file "todo.org")
+         "* %? :READ:\n%U\n%a\n")
         ("n" "note" entry
          (file "todo.org")
          "* %? :NOTE:\n%U\n%a\n")))
@@ -287,7 +290,7 @@ If there is no plausible default, return nil."
                ((org-agenda-overriding-header "Notes")
                 (org-tags-match-list-sublevels t))))))
 
-(setq org-tag-alist '(("NOTE" . ?n)))
+(setq org-tag-alist '(("NOTE" . ?n) ("READ" . ?r)))
 (setq org-tags-exclude-from-inheritance '("NOTE"))
 
 (add-to-list 'org-structure-template-alist
