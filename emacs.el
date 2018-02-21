@@ -249,6 +249,9 @@ If there is no plausible default, return nil."
   (fci-mode))
 
 (add-hook 'python-mode-hook 'sli-python-mode-init)
+;; TODO: check if exists ipython
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "--simple-prompt -i")
 ;;; ============ ORG ============
 (require 'org-bullets)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
