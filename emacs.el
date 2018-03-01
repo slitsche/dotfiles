@@ -282,13 +282,23 @@ If there is no plausible default, return nil."
          "* %? :READ:\n%U\n%a\n")
         ("n" "note" entry
          (file "todo.org")
-         "* %? :NOTE:\n%U\n%a\n")))
+         "* %? :NOTE:\n%U\n%a\n")
+        ("j" "Journal" entry
+         (file+datetree "no-agenda/worklog.org")
+         "*** %?\n%U"
+         :tree-type 'week)))
 
 ;; http://doc.norang.ca/org-mode.html#CustomAgendaViews
+;; https://emacs.stackexchange.com/questions/12517/how-do-i-make-the-timespan-shown-by-org-agenda-start-yesterday
 (setq org-agenda-custom-commands
       (quote (("n" "Notes" tags "NOTE"
                ((org-agenda-overriding-header "Notes")
-                (org-tags-match-list-sublevels t))))))
+                (org-tags-match-list-sublevels t)))
+              ("p" "My Personal List"
+               ((agenda "agenda"
+                         ((org-agenda-span 'day))
+                         nil nil)
+                (tags-todo "-READ"))))))
 
 (setq org-tag-alist '(("NOTE" . ?n) ("READ" . ?r)))
 (setq org-tags-exclude-from-inheritance '("NOTE"))
