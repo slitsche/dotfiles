@@ -167,8 +167,7 @@ If there is no plausible default, return nil."
   ;; which resolves a symbol with namespace
   ;;(define-key evil-motion-state-map (kbd "C-]") 'cider-find-var)
   (define-key (current-local-map) (kbd "<f5>") 'cider-find-var)
-  (yas/minor-mode 1)
-  (fci-mode))
+  (yas/minor-mode 1))
 
 (add-hook 'clojure-mode-hook #'paredit-mode)
 (add-hook 'clojure-mode-hook #'sli-clojure-mode-init)
@@ -204,6 +203,7 @@ If there is no plausible default, return nil."
 ;; fill-paragraph should adhere to this
 (setq-default fill-column 80)
 (add-hook 'text-mode-hook 'auto-fill-mode)
+(add-hook 'prog-mode-hook 'fci-mode)
 
 ;; ================= Markdown =================
 (add-hook 'markdown-mode-hook 'fci-mode) ; enable fill-column-indicator
@@ -245,8 +245,7 @@ If there is no plausible default, return nil."
 (defun sli-python-mode-init ()
   "For evil mode and clojure the word boundaries are differernt."
   (modify-syntax-entry ?_ "w" python-mode-syntax-table)
-  (setq find-tag-default-function 'sli-find-tag-clojure)
-  (fci-mode))
+  (setq find-tag-default-function 'sli-find-tag-clojure))
 
 (add-hook 'python-mode-hook 'sli-python-mode-init)
 ;; TODO: check if exists ipython
