@@ -74,7 +74,7 @@ Return a list of installed packages or nil for every skipped package."
 (global-set-key (kbd "C-SPC") #'company-complete)
 ;; we replace switch-to-buffer with helm
 (global-set-key (kbd "C-x b") #'helm-mini)
-;(defalias 'list-buffers 'ibuffer)
+(defalias 'list-buffers 'ibuffer)
 
 ;; Configure imenu via helm: lookup buffer contents
 ;; shortcut derived from Eclipse C-o
@@ -267,22 +267,32 @@ If there is no plausible default, return nil."
 (add-hook 'org-mode-hook 'org-indent-mode)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+(setq org-todo-keywords
+      '((sequence "TODO" "NEXT" "WAIT" "|" "DONE")))
+
 (setq org-catch-invisible-edits 'show-and-error)
-(setq org-agenda-files (list "~/Documents/org/"))
 (setq org-directory "~/Documents/org")
+(setq org-agenda-files (list "~/Documents/org/gtd.org"
+                             "~/Documents/org/todo.org"))
+(setq sli-notes-files '("~/Documents/org/notes.org"
+                        "~/Documents/org/emacs.org"
+                        "~/Documents/org/privat.org"))
+(setq org-agenda-text-search-extra-files sli-notes-files)
 ;http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
-(setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))))
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))
+                           (sli-notes-files . (:maxlevel . 3))
+                           (("~/Documents/org/someday.org") . (:maxlevel . 3))))
 ;https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
 (setq org-capture-templates
-      '(("a" "My TODO task format." entry
-         (file "todo.org")
-         "* TODO %?\nSCHEDULED: %t\n%a")
+      '(("t" "Todo task inbox" entry
+         (file "inbox.org")
+         "* TODO %?\n%U")
         ("r" "read" entry
-         (file "todo.org")
-         "* %? :READ:\n%U\n%a\n")
+         (file "inbox.org")
+         "* %? :READ:\n%U\n")
         ("n" "note" entry
-         (file "todo.org")
-         "* %? :NOTE:\n%U\n%a\n")
+         (file "inbox.org")
+         "* %?\n%U")
         ("j" "Journal" entry
          (file+datetree "no-agenda/worklog.org")
          "*** %?\n%U"
@@ -290,17 +300,25 @@ If there is no plausible default, return nil."
 
 ;; http://doc.norang.ca/org-mode.html#CustomAgendaViews
 ;; https://emacs.stackexchange.com/questions/12517/how-do-i-make-the-timespan-shown-by-org-agenda-start-yesterday
+
 (setq org-agenda-custom-commands
       (quote (("n" "Notes" tags "NOTE"
                ((org-agenda-overriding-header "Notes")
                 (org-tags-match-list-sublevels t)))
               ("p" "My Personal List"
-               ((agenda "agenda"
-                         ((org-agenda-span 'day))
-                         nil nil)
-                (tags-todo "-READ"))))))
-
-(setq org-tag-alist '(("NOTE" . ?n) ("READ" . ?r)))
+               ((agenda ""
+                        ((org-agenda-span 'day))
+                        nil nil)
+                (tags-todo "-Boss/!-TODO" (
+                                    ;; I want to exclude scheduled times from tags
+                                    (org-agenda-tags-todo-honor-ignore-options t)
+                                    (org-agenda-todo-ignore-scheduled t)
+                                    (org-agenda-todo-ignore-deadlines t))))))))
+; (list "~/Documents/org/gtd.org")
+(setq org-tag-alist '(("NOTE" . ?n)
+                      ("READ" . ?r)
+                      ("Qst" . ?w)
+                      ("Boss" . ?o)))
 (setq org-tags-exclude-from-inheritance '("NOTE"))
 
 (add-to-list 'org-structure-template-alist
