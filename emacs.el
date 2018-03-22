@@ -267,7 +267,7 @@ If there is no plausible default, return nil."
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 (setq org-todo-keywords
-      '((sequence "TODO" "NEXT" "WAIT" "|" "DONE")))
+      '((sequence "TODO(t)" "NEXT(n)" "WAIT(w)" "|" "DONE(d)")))
 
 (setq org-catch-invisible-edits 'show-and-error)
 (setq org-directory "~/Documents/org")
@@ -306,13 +306,16 @@ If there is no plausible default, return nil."
                 (org-tags-match-list-sublevels t)))
               ("p" "My Personal List"
                ((agenda ""
-                        ((org-agenda-span 'day))
-                        nil nil)
-                (tags-todo "-Boss/!-TODO" (
-                                    ;; I want to exclude scheduled times from tags
-                                    (org-agenda-tags-todo-honor-ignore-options t)
-                                    (org-agenda-todo-ignore-scheduled t)
-                                    (org-agenda-todo-ignore-deadlines t))))))))
+                        ((org-agenda-span 'day)))
+                (tags-todo "-Boss/!-TODO"
+                           ((org-agenda-tags-todo-honor-ignore-options t)
+                            (org-agenda-todo-ignore-scheduled t)
+                            (org-agenda-todo-ignore-deadlines t))
+                           nil)
+                (tags-todo "READ/NEXT"
+                           ((org-agenda-files sli-notes-files)
+                            (org-agenda-overriding-header "Reading List"))))))))
+
 ; (list "~/Documents/org/gtd.org")
 (setq org-tag-alist '(("NOTE" . ?n)
                       ("READ" . ?r)
