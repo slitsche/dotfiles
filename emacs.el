@@ -275,7 +275,9 @@ If there is no plausible default, return nil."
                              "~/Documents/org/todo.org"))
 (setq sli-notes-files '("~/Documents/org/notes.org"
                         "~/Documents/org/emacs.org"
-                        "~/Documents/org/privat.org"))
+                        "~/Documents/org/privat.org"
+                        "~/Documents/org/projects.org"))
+
 (setq org-agenda-text-search-extra-files sli-notes-files)
 ;http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))
@@ -304,6 +306,21 @@ If there is no plausible default, return nil."
       (quote (("n" "Notes" tags "NOTE"
                ((org-agenda-overriding-header "Notes")
                 (org-tags-match-list-sublevels t)))
+              ("r" "Review"
+               ((todo "TODO"
+                      ((org-agenda-files '("~/Documents/org/inbox.org"))
+                       (org-agenda-overriding-header "New Items")))
+                (tags-todo "-Boss-READ/TODO"
+                           ((org-agenda-overriding-header "Next Todos")
+                            (org-agenda-tags-todo-honor-ignore-options t)
+                            (org-agenda-todo-ignore-scheduled t)
+                            (org-agenda-todo-ignore-deadlines t)))
+                (tags-todo "+READ/TODO"
+                           ((org-agenda-overriding-header "Next Read")
+                            (org-agenda-tags-todo-honor-ignore-options t)
+                            (org-agenda-todo-ignore-scheduled t)
+                            (org-agenda-todo-ignore-deadlines t)
+                            (org-agenda-files (append org-agenda-files sli-notes-files))))))
               ("p" "My Personal List"
                ((agenda ""
                         ((org-agenda-span 'day)))
