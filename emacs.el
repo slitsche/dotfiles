@@ -337,9 +337,12 @@ If there is no plausible default, return nil."
 (setq org-tag-alist '(("NOTE" . ?n)
                       ("READ" . ?r)
                       ("Qst" . ?w)
-                      ("Boss" . ?o)))
-(setq org-tags-exclude-from-inheritance '("NOTE"))
+                      ("Boss" . ?b)
+                      ("Proj" . ?p)))
+(setq org-tags-exclude-from-inheritance '("NOTE" "Proj"))
 
+(setq org-stuck-projects
+      '("+Proj/-DONE" ("NEXT" "WAIT") nil nil))
 (add-to-list 'org-structure-template-alist
              '("C" "#+BEGIN_COMMENT\n?\n#+END_COMMENT" "<!--?-->"))
 
