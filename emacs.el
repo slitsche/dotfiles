@@ -36,6 +36,7 @@ Return a list of installed packages or nil for every skipped package."
                           'company
                           ;'evil
                           ;'evil-magit
+                          'elfeed
                           'fill-column-indicator
                           'go-autocomplete
                           'go-eldoc
@@ -99,6 +100,9 @@ Return a list of installed packages or nil for every skipped package."
 (linum-relative-global-mode)
 ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
+(add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
+(add-to-list 'evil-emacs-state-modes 'elfeed-search-mode)
+(add-to-list 'evil-emacs-state-modes 'help-mode)
 ;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
 (fset 'evil-visual-update-x-selection 'ignore)
 ;; This is not Vim like, but helps to eval last expression for lispy languages
@@ -352,18 +356,26 @@ If there is no plausible default, return nil."
 (setq org-outline-path-complete-in-steps nil)
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 
-;; Setup Org Babel for SQL
+;; Setup Org Babel
+(require 'ob-clojure)
+(setq org-babel-clojure-backend 'cider)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((sql . t)
-   (sh . t)
-   (emacs-lisp . t)))
+   (shell . t)
+   (emacs-lisp . t)
+   (clojure . t)))
+
+
+;; ===================== other stuff ===========
 ;; Fix issue in Tramp when executing region
 ;; Tramp assumes the local TMPDIR exists remotely. WHY? TODO.
 ;; See John Hitchins remark https://lists.gnu.org/archive/html/emacs-orgmode/2016-01/msg00321.html
 ;; and https://lists.gnu.org/archive/html/emacs-orgmode/2016-01/msg00282.html
 (setq temporary-file-directory "/tmp")
-
+(setq elfeed-feeds
+      '("http://nullprogram.com/feed/"
+        "http://planet.emacsen.org/atom.xml"))
 ;;
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -379,4 +391,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy tsdh-light)))
  '(package-selected-packages
    (quote
-    (htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
+    (elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
