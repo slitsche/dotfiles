@@ -102,7 +102,11 @@ Return a list of installed packages or nil for every skipped package."
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
 (add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
 (add-to-list 'evil-emacs-state-modes 'elfeed-search-mode)
-(add-to-list 'evil-emacs-state-modes 'help-mode)
+;; help-mode is in evil-motion-state-mode, there for change initial state
+;; https://emacs.stackexchange.com/questions/31244/how-can-i-disable-evil-in-help-mode
+;; I prefer this because tab for move to next link is hidden.
+(evil-set-initial-state 'help-mode 'emacs)
+;(add-to-list 'evil-emacs-state-modes 'help-mode)
 ;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
 (fset 'evil-visual-update-x-selection 'ignore)
 ;; This is not Vim like, but helps to eval last expression for lispy languages
