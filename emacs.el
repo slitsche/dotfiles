@@ -218,7 +218,8 @@ If there is no plausible default, return nil."
 
 (setq sql-font-lock-buffers '(sql-mode sql-interactive-mode))
 (setq comint-scroll-to-bottom-on-output t)
-
+(if (file-exists-p  "~/.emacs.d/sql.el")
+    (load "~/.emacs.d/sql.el"))
 
 ;; ============= GO ==============
 ;; http://arenzana.org/2015/Emacs-for-Go/
