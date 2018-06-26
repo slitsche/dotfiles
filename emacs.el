@@ -29,6 +29,11 @@ Return a list of installed packages or nil for every skipped package."
 (require 'evil)
 (package-initialize)
 
+;; https://github.com/jwiegley/use-package
+(eval-when-compile
+  (require 'use-package))
+
+
 (ensure-package-installed
                           'cider
                           'clj-refactor
@@ -53,6 +58,7 @@ Return a list of installed packages or nil for every skipped package."
                           'paredit
                           'projectile
                           'slime
+                          'use-package
                           'yaml-mode)
 
 ;;https://www.masteringemacs.org/article/disabling-prompts-emacs
@@ -396,4 +402,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy tsdh-light)))
  '(package-selected-packages
    (quote
-    (elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
+    (use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
