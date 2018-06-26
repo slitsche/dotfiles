@@ -227,6 +227,12 @@ If there is no plausible default, return nil."
 (if (file-exists-p  "~/.emacs.d/sql.el")
     (load "~/.emacs.d/sql.el"))
 
+(use-package sql
+  :config
+  (sql-set-product-feature 'postgres
+                         :prompt-regexp "^[[:alnum:]_]*=[#>] "))
+
+;;(sql-set-product-feature 'postgres :prompt-length 10)
 ;; ============= GO ==============
 ;; http://arenzana.org/2015/Emacs-for-Go/
 (defun my-go-mode-hook ()
