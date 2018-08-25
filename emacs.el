@@ -61,6 +61,7 @@ Return a list of installed packages or nil for every skipped package."
                           'use-package
                           'yaml-mode)
 
+(server-start)
 ;;https://www.masteringemacs.org/article/disabling-prompts-emacs
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
@@ -118,6 +119,11 @@ Return a list of installed packages or nil for every skipped package."
 ;; This is not Vim like, but helps to eval last expression for lispy languages
 ;; Cursor does not move back when switching to normal-state
 (setq evil-move-cursor-back nil)
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
 
 ;; ================== Clojure =================
 (defun sli-find-tag-default-bounds ()
@@ -415,4 +421,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy tsdh-light)))
  '(package-selected-packages
    (quote
-    (use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
+    (eclim octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
