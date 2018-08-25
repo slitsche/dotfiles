@@ -396,6 +396,23 @@ If there is no plausible default, return nil."
    (emacs-lisp . t)
    (clojure . t)))
 
+;;; ============ Java =========
+
+;;  good read: http://www.goldsborough.me/emacs,/java/2016/02/24/22-54-16-setting_up_emacs_for_java_development/
+
+(require 'eclim)
+(add-hook 'java-mode-hook 'eclim-mode)
+;; a rather unusual target for installing binaries.  Issue disscussion
+;; shows it is not consistent.
+;; https://github.com/senny/emacs-eclim/issues/104
+(setq eclim-executable "~/.p2/pool/plugins/org.eclim_2.8.0/bin/eclim")
+
+;; autocomplete:
+(require 'company-emacs-eclim)
+(company-emacs-eclim-setup)
+
+;; seems very useful: propose solve of problem like Super+1 in eclipse
+(define-key eclim-mode-map (kbd "C-c C-c") 'eclim-problems-correct)
 
 ;; ===================== other stuff ===========
 ;; Fix issue in Tramp when executing region
@@ -421,4 +438,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy tsdh-light)))
  '(package-selected-packages
    (quote
-    (eclim octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
+    (company-emacs-eclim eclim octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
