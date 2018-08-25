@@ -272,6 +272,13 @@ If there is no plausible default, return nil."
 ;; TODO: check if exists ipython
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "--simple-prompt -i")
+
+;;; ============ Octave =========
+
+;; this overrides the setting for objc
+;; useful for the ML cousera course
+(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+
 ;;; ============ ORG ============
 (require 'org-bullets)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
