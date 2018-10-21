@@ -29,11 +29,6 @@ Return a list of installed packages or nil for every skipped package."
 (require 'evil)
 (package-initialize)
 
-;; https://github.com/jwiegley/use-package
-(eval-when-compile
-  (require 'use-package))
-
-
 (ensure-package-installed
                           'cider
                           'clj-refactor
@@ -60,6 +55,8 @@ Return a list of installed packages or nil for every skipped package."
                           'slime
                           'use-package
                           'yaml-mode)
+
+;; https://github.com/jwiegley/use-package
 (eval-when-compile
   (require 'use-package))
 
@@ -442,7 +439,8 @@ If there is no plausible default, return nil."
 (setq temporary-file-directory "/tmp")
 (setq elfeed-feeds
       '("http://nullprogram.com/feed/"
-        "http://planet.emacsen.org/atom.xml"))
+        "http://planet.emacsen.org/atom.xml"
+        "http://sreweekly.com/feed/"))
 ;;
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
