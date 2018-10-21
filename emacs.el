@@ -94,7 +94,13 @@ To solve this problem, when your code only knows the relative path of another fi
 (when (fboundp 'winner-mode)
       (winner-mode 1))
 
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+
 (setq column-number-mode t)
+;; Please avoid tabs
 (setq-default indent-tabs-mode nil)
 (set-face-attribute 'default nil :height 140)
 ;; make auto complete always availabe
@@ -334,6 +340,7 @@ If there is no plausible default, return nil."
 (setq sli-notes-files '("~/Documents/org/notes.org"
                         "~/Documents/org/emacs.org"
                         "~/Documents/org/privat.org"
+                        "~/Documents/org/cassandra-training.org"
                         "~/Documents/org/projects.org"))
 
 (setq org-agenda-text-search-extra-files sli-notes-files)
