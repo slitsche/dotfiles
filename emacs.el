@@ -60,6 +60,30 @@ Return a list of installed packages or nil for every skipped package."
                           'slime
                           'use-package
                           'yaml-mode)
+(eval-when-compile
+  (require 'use-package))
+
+;; http://ergoemacs.org/emacs/organize_your_dot_emacs.html
+(defun xah-get-fullpath (@file-relative-path)
+  "Return the full path of *file-relative-path, relative to caller's file location.
+
+Example: If you have this line
+ (xah-get-fullpath \"../xyz.el\")
+in the file at
+ /home/mary/emacs/emacs_lib.el
+then the return value is
+ /home/mary/xyz.el
+Regardless how or where emacs_lib.el is called.
+
+This function solves 2 problems.
+
+① If you have file A, that calls the `load' on a file at B, and B calls `load' on file C using a relative path, then Emacs will complain about unable to find C. Because, emacs does not switch current directory with `load'.
+
+To solve this problem, when your code only knows the relative path of another file C, you can use the variable `load-file-name' to get the current file's full path, then use that with the relative path to get a full path of the file you are interested.
+
+② To know the current file's full path, emacs has 2 ways: `load-file-name' and `buffer-file-name'. If the file is loaded by `load', then `load-file-name' works but `buffer-file-name' doesn't. If the file is called by `eval-buffer', then `load-file-name' is nil. You want to be able to get the current file's full path regardless the file is run by `load' or interactively by `eval-buffer'."
+
+  (concat (file-name-directory (or load-file-name buffer-file-name)) @file-relative-path))
 
 (server-start)
 ;;https://www.masteringemacs.org/article/disabling-prompts-emacs
@@ -276,7 +300,7 @@ If there is no plausible default, return nil."
 
 (add-hook 'python-mode-hook 'sli-python-mode-init)
 ;; TODO: check if exists ipython
-(setq python-shell-interpreter "ipython"
+(setq python-shell-interpreter "ipython3"
       python-shell-interpreter-args "--simple-prompt -i")
 
 ;;; ============ Octave =========
@@ -392,27 +416,16 @@ If there is no plausible default, return nil."
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((sql . t)
-   (shell . t)
+   (sh . t)
    (emacs-lisp . t)
    (clojure . t)))
+
+(load (xah-get-fullpath "sli-publish.el"))
 
 ;;; ============ Java =========
 
 ;;  good read: http://www.goldsborough.me/emacs,/java/2016/02/24/22-54-16-setting_up_emacs_for_java_development/
 
-(require 'eclim)
-(add-hook 'java-mode-hook 'eclim-mode)
-;; a rather unusual target for installing binaries.  Issue disscussion
-;; shows it is not consistent.
-;; https://github.com/senny/emacs-eclim/issues/104
-(setq eclim-executable "~/.p2/pool/plugins/org.eclim_2.8.0/bin/eclim")
-
-;; autocomplete:
-(require 'company-emacs-eclim)
-(company-emacs-eclim-setup)
-
-;; seems very useful: propose solve of problem like Super+1 in eclipse
-(define-key eclim-mode-map (kbd "C-c C-c") 'eclim-problems-correct)
 
 ;; ===================== other stuff ===========
 ;; Fix issue in Tramp when executing region
