@@ -83,6 +83,7 @@ To solve this problem, when your code only knows the relative path of another fi
   (concat (file-name-directory (or load-file-name buffer-file-name)) @file-relative-path))
 
 (server-start)
+(tool-bar-mode 1)
 ;;https://www.masteringemacs.org/article/disabling-prompts-emacs
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
@@ -146,7 +147,8 @@ To solve this problem, when your code only knows the relative path of another fi
 ;; This is not Vim like, but helps to eval last expression for lispy languages
 ;; Cursor does not move back when switching to normal-state
 (setq evil-move-cursor-back nil)
-
+;; enable redo via C-r
+(global-undo-tree-mode)
 (use-package evil-surround
   :ensure t
   :config
