@@ -83,7 +83,7 @@ To solve this problem, when your code only knows the relative path of another fi
   (concat (file-name-directory (or load-file-name buffer-file-name)) @file-relative-path))
 
 (server-start)
-(tool-bar-mode 1)
+(tool-bar-mode 0)
 ;;https://www.masteringemacs.org/article/disabling-prompts-emacs
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
