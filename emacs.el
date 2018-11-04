@@ -397,12 +397,12 @@ If there is no plausible default, return nil."
                            ((org-agenda-files sli-notes-files)
                             (org-agenda-overriding-header "Reading List"))))))))
 
-; (list "~/Documents/org/gtd.org")
 (setq org-tag-alist '(("NOTE" . ?n)
                       ("READ" . ?r)
-                      ("Qst" . ?w)
+                      ("Qst" . ?f)
                       ("Boss" . ?b)
-                      ("Proj" . ?p)))
+                      ("Proj" . ?p)
+                      ("Geld" . ?g)))
 (setq org-tags-exclude-from-inheritance '("NOTE" "Proj"))
 
 (setq org-stuck-projects

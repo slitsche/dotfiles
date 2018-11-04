@@ -1,9 +1,20 @@
-;; This buffer is for text that is not saved, and for Lisp evaluation.
-;; To create a file, visit it with <open> and enter text in its buffer.
-
 (require 'ox-publish)
+
+;(setq  org-html-preamble-format '(("en" "<h1>hello sli</h1>")))
+(setq sli-biosoft-header
+      (concat "<div id=\"header\">"
+       "<h1>Stefan Litsche</h1>"
+       "<ul>"
+           "<li><a href=\"/\">Home</a></li>"
+           "<li><a href=\"/blog/\">Blog</a></li>"
+           "<li><a href=\"/projects/\">Projects</a></li>"
+           "<li><a href=\"/contact.html\">Contact</a></li>"
+           "<li><a href=\"/resume.html\">Resume</a></li>"
+       "</ul>"
+       "</div>"))
+
 (setq org-publish-project-alist
-      '(
+      `(
 
         ;; ... add allthe components here (see below)...
         ("org-notes"
@@ -11,11 +22,14 @@
          :base-extension "org"
          :publishing-directory "~/work/git/biosoft/html/"
          :html-head-include-default-style nil
-         :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\">"
-         :recusive t
+         :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/style.css\">"
+         :recursive t
          :publishing-function org-html-publish-to-html
          :headline-levels 4             ; Just the default for this project.
-         :auto-preamble t
+         :auto-preamble nil
+         :html-preamble ,sli-biosoft-header
+         ;:html-preamble-format  "<h1>hello sli</h1>" ;(("en" "<h1>hello sli</h1>"))
+         :with-toc nil
          )
 
         ("org-static"
@@ -26,6 +40,6 @@
         :publishing-function org-publish-attachment
         )
 
-        ("biosoft" :components ("org-notes" "org-static"))
-        ))
+        ("biosoft" :components ("org-notes" "org-static"))))
+
 (setq org-html-html5-fancy t)
