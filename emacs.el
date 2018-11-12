@@ -253,7 +253,7 @@ If there is no plausible default, return nil."
 (setq-default fill-column 80)
 (add-hook 'text-mode-hook 'auto-fill-mode)
 (add-hook 'prog-mode-hook 'fci-mode)
-
+(setq prog-mode-hook nil)
 ;; ================= Markdown =================
 (add-hook 'markdown-mode-hook 'fci-mode) ; enable fill-column-indicator
 
@@ -385,7 +385,7 @@ If there is no plausible default, return nil."
                             (org-agenda-todo-ignore-scheduled t)
                             (org-agenda-todo-ignore-deadlines t)
                             (org-agenda-files (append org-agenda-files sli-notes-files))))))
-              ("p" "My Personal List"
+              ("w" "My Work List"
                ((agenda ""
                         ((org-agenda-span 'day)))
                 (tags-todo "-Boss/!-TODO"
@@ -395,7 +395,11 @@ If there is no plausible default, return nil."
                            nil)
                 (tags-todo "READ/NEXT"
                            ((org-agenda-files sli-notes-files)
-                            (org-agenda-overriding-header "Reading List"))))))))
+                            (org-agenda-overriding-header "Reading List")))))
+              ("p" "Private stuff"
+               (;;;(agenda "" ((org-agenda-span 'week)))
+                (tags-todo "-READ/TODO"
+                           ((org-agenda-files '("~/Documents/org/privat.org")))))))))
 
 (setq org-tag-alist '(("NOTE" . ?n)
                       ("READ" . ?r)
