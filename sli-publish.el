@@ -8,8 +8,8 @@
            "<li><a href=\"/\">Home</a></li>"
            "<li><a href=\"/blog/\">Blog</a></li>"
            "<li><a href=\"/projects/\">Projects</a></li>"
-           "<li><a href=\"/contact.html\">Contact</a></li>"
-           "<li><a href=\"/resume.html\">Resume</a></li>"
+           "<li><a href=\"/impressum.html\">Impressum</a></li>"
+;;           "<li><a href=\"/resume.html\">Resume</a></li>"
        "</ul>"
        "</div>"))
 
@@ -34,7 +34,7 @@
 
         ("org-static"
         :base-directory "~/work/git/biosoft/src/"
-        :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+        :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|html"
         :publishing-directory "~/work/git/biosoft/html/"
         :recursive t
         :publishing-function org-publish-attachment
