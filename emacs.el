@@ -361,7 +361,11 @@ If there is no plausible default, return nil."
         ("j" "Journal" entry
          (file+datetree "no-agenda/worklog.org")
          "*** %?\n%U"
-         :tree-type 'week)))
+         :tree-type 'week)
+        ("h" "Health" entry
+         (file+datetree "no-agenda/health.org")
+         "*** %?\n%U"
+        )))
 
 ;; http://doc.norang.ca/org-mode.html#CustomAgendaViews
 ;; https://emacs.stackexchange.com/questions/12517/how-do-i-make-the-timespan-shown-by-org-agenda-start-yesterday
