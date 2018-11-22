@@ -23,6 +23,7 @@
          :publishing-directory "~/work/git/biosoft/html/"
          :html-head-include-default-style nil
          :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/style.css\">"
+         :html-inline-images t
          :recursive t
          :publishing-function org-html-publish-to-html
          :headline-levels 4             ; Just the default for this project.
