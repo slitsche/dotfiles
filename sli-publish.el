@@ -6,8 +6,8 @@
        "<h1>Stefan Litsche</h1>"
        "<ul>"
            "<li><a href=\"/\">Home</a></li>"
-           "<li><a href=\"/blog/\">Blog</a></li>"
-           "<li><a href=\"/projects/\">Projects</a></li>"
+           "<li><a href=\"/articles.html\">Blog</a></li>"
+;;           "<li><a href=\"/projects/\">Projects</a></li>"
            "<li><a href=\"/impressum.html\">Impressum</a></li>"
 ;;           "<li><a href=\"/resume.html\">Resume</a></li>"
        "</ul>"
@@ -18,6 +18,14 @@
 
         ;; ... add allthe components here (see below)...
         ("org-notes"
+         :auto-sitemap t
+         ;; :sitemap-function my-blog-sitemap
+         :sitemap-sort-files chronologically
+         :sitemap-sort-folders nil
+         :sitemap-style list
+         :sitemap-title "Articles"
+         :sitemap-filename "articles.org"
+         :section-numbers nil
          :base-directory "~/work/git/biosoft/src/"
          :base-extension "org"
          :publishing-directory "~/work/git/biosoft/html/"
