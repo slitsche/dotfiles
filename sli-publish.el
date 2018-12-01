@@ -1,5 +1,9 @@
 (require 'ox-publish)
 
+;; the variable org-html-metadata-timestamp-format
+;; is not used for %d in org version 8.2.10
+(setq org-export-date-timestamp-format "%Y-%m-%d")
+
 ;(setq  org-html-preamble-format '(("en" "<h1>hello sli</h1>")))
 (setq sli-biosoft-header
       (concat "<div id=\"header\">"
@@ -12,6 +16,13 @@
 ;;           "<li><a href=\"/resume.html\">Resume</a></li>"
        "</ul>"
        "</div>"))
+
+(setq sli-biosoft-footer
+      (concat "<p>"
+              "Created: %d "
+              "Last modified: %C "
+              "Handcrafted using Emacs and Orgmode"
+              "</p>"))
 
 (setq org-publish-project-alist
       `(
@@ -32,11 +43,14 @@
          :html-head-include-default-style nil
          :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/style.css\">"
          :html-inline-images t
+         :html-doctype "html5"
+         :html-head-include-default-style nil
          :recursive t
          :publishing-function org-html-publish-to-html
          :headline-levels 4             ; Just the default for this project.
          :auto-preamble nil
          :html-preamble ,sli-biosoft-header
+         :html-postamble ,sli-biosoft-footer
          ;:html-preamble-format  "<h1>hello sli</h1>" ;(("en" "<h1>hello sli</h1>"))
          :with-toc nil
          )
