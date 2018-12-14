@@ -335,7 +335,8 @@ If there is no plausible default, return nil."
 (setq org-catch-invisible-edits 'show-and-error)
 (setq org-directory "~/Documents/org")
 (setq org-agenda-files (list "~/Documents/org/gtd.org"
-                             "~/Documents/org/todo.org"))
+                             "~/Documents/org/todo.org"
+                             "~/Documents/org/networking.org"))
 (setq sli-notes-files '("~/Documents/org/notes.org"
                         "~/Documents/org/emacs.org"
                         "~/Documents/org/privat.org"
