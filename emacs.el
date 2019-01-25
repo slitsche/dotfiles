@@ -127,12 +127,14 @@ To solve this problem, when your code only knows the relative path of another fi
 (setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
 (add-hook 'projectile-idle-timer-hook #'projectile-invalidate-cache)
 
+;; exclude maven artifacts
+(add-to-list 'projectile-globally-ignored-directories "target")
 ;; ================== Evil =================
 (evil-mode t)
 ;; add evil movements to magit buffers. This changes some magit key bindings
 (require 'evil-magit)
 ;; https://github.com/Fanael/relative-line-numbers
-(linum-relative-global-mode)
+;(linum-relative-global-mode)
 ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
 (add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
