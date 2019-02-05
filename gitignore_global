@@ -3,4 +3,5 @@
 *.swp
 TAGS
 *.pyc
+.idea
 
