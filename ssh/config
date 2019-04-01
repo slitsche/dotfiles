@@ -1,8 +1,0 @@
-StrictHostKeyChecking no
-#PasswordAuthentication no
-GSSAPIAuthentication no
-ForwardAgent yes
-ServerAliveInterval 30
-# since OS Sierra Macos does it no longer
-AddKeysToAgent yes
-
