@@ -258,7 +258,11 @@ If there is no plausible default, return nil."
 (setq prog-mode-hook nil)
 ;; ================= Markdown =================
 (add-hook 'markdown-mode-hook 'fci-mode) ; enable fill-column-indicator
+;; Normally I write md for github, so use its way of rendering
+(setq markdown-command "pandoc -f markdown_github -t html")
 
+
+;; ================= SQL =================
 (setq sql-font-lock-buffers '(sql-mode sql-interactive-mode))
 (setq comint-scroll-to-bottom-on-output t)
 (if (file-exists-p  "~/.emacs.d/sql.el")
@@ -317,6 +321,7 @@ If there is no plausible default, return nil."
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
 ;;; ============ ORG ============
+(require 'org)
 (require 'org-bullets)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
@@ -343,7 +348,8 @@ If there is no plausible default, return nil."
                         "~/Documents/org/emacs.org"
                         "~/Documents/org/privat.org"
                         "~/Documents/org/cassandra-training.org"
-                        "~/Documents/org/projects.org"))
+                        "~/Documents/org/projects.org"
+                        "~/Documents/org/no-agenda/zfs.org"))
 
 (setq org-agenda-text-search-extra-files sli-notes-files)
 ;http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
@@ -437,12 +443,22 @@ If there is no plausible default, return nil."
    (emacs-lisp . t)
    (clojure . t)))
 
-(load (xah-get-fullpath "sli-publish.el"))
+;;(load (xah-get-fullpath "sli-publish.el"))
 
 ;;; ============ Java =========
 
 ;;  good read: http://www.goldsborough.me/emacs,/java/2016/02/24/22-54-16-setting_up_emacs_for_java_development/
+;;; ============ LILYPOND  =========
 
+(setq LilyPond-command-alist '(("LilyPond" "lilypond -o ../target %s" "%s" "%l" "View")
+                              ("2PS" "lilypond -f ps %s" "%s" "%p" "ViewPS")
+                              ("Book" "lilypond-book %x" "%x" "%l" "LaTeX")
+                              ("LaTeX" "latex '\\nonstopmode\\input %l'" "%l" "%d" "ViewDVI")
+                              ("View" "xpdf %f")
+                              ("ViewPDF" "xpdf %f")
+                              ("ViewPS" "gv --watch %p")
+                              ("Midi" "timidity %m")
+                              ("MidiAll" "")))
 
 ;; ===================== other stuff ===========
 ;; Fix issue in Tramp when executing region
@@ -469,4 +485,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy tsdh-light)))
  '(package-selected-packages
    (quote
-    (org-static-blog company-emacs-eclim eclim octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
+    (cider org-static-blog company-emacs-eclim eclim octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
