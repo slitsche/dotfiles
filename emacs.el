@@ -343,10 +343,10 @@ If there is no plausible default, return nil."
 (setq org-directory "~/Documents/org")
 (setq org-agenda-files (list "~/Documents/org/gtd.org"
                              "~/Documents/org/todo.org"
+                             "~/Documents/org/privat.org"
                              "~/Documents/org/networking.org"))
 (setq sli-notes-files '("~/Documents/org/notes.org"
                         "~/Documents/org/emacs.org"
-                        "~/Documents/org/privat.org"
                         "~/Documents/org/cassandra-training.org"
                         "~/Documents/org/projects.org"
                         "~/Documents/org/no-agenda/zfs.org"))
