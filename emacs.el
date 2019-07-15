@@ -485,4 +485,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy tsdh-light)))
  '(package-selected-packages
    (quote
-    (cider org-static-blog company-emacs-eclim eclim octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
+    (dockerfile-mode cider org-static-blog company-emacs-eclim eclim octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
