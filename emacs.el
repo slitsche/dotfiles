@@ -87,7 +87,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;; We want the active buffer more present then the others
 (dimmer-mode)
-(setq dimmer-fraction 0.5)
+(setq dimmer-fraction 0.4)
 ;;https://www.masteringemacs.org/article/disabling-prompts-emacs
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
@@ -365,6 +365,9 @@ If there is no plausible default, return nil."
       '(("t" "Todo task inbox" entry
          (file "inbox.org")
          "* TODO %?\n%U")
+        ("T" "Todo task (active)" entry
+         (file "todo.org")
+         "* TODO %^{Title}\n%U\n%?")
         ("r" "read" entry
          (file "inbox.org")
          "* %? :READ:\n%U\n")
