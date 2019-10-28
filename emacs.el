@@ -440,6 +440,17 @@ If there is no plausible default, return nil."
 (setq org-outline-path-complete-in-steps nil)
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 
+;; I want to clean up my todo file which is a long list of TODOs and DONE in between
+;; https://stackoverflow.com/a/27043756/4096511
+;; the last parameter can be 'tree or 'agenda
+(defun org-archive-done-tasks ()
+  (interactive)
+  (org-map-entries
+   (lambda ()
+     (org-archive-subtree)
+     (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
+   "/DONE" 'file))
+
 ;; Setup Org Babel
 (require 'ob-clojure)
 (setq org-babel-clojure-backend 'cider)
