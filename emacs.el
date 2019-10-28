@@ -500,7 +500,7 @@ If there is no plausible default, return nil."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (dichromacy tsdh-light)))
+ '(custom-enabled-themes (quote (dichromacy)))
  '(package-selected-packages
    (quote
     (dimmer dockerfile-mode cider org-static-blog company-emacs-eclim eclim octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
