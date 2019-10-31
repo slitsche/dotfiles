@@ -190,15 +190,6 @@ If there is no plausible default, return nil."
       (cons from to))))
 
 (require 'clj-refactor)
-;; reload namespace
-(defun cider-namespace-refresh ()
-  (interactive)
-  (cider-interactive-eval
-   "(require 'clojure.tools.namespace.repl)
-    (clojure.tools.namespace.repl/refresh)"))
-
-; TODO: (define-key clojure-mode-map (kbd "F12") 'cider-namespace-refresh)
-(global-set-key (kbd "<f12>") 'cider-namespace-refresh)
 
 (defun sli-find-tag-clojure ()
   "Determine default tag to search for, based on text at point.
