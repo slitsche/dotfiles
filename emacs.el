@@ -342,9 +342,9 @@ If there is no plausible default, return nil."
                              "~/Documents/org/networking.org"))
 (setq sli-notes-files '("~/Documents/org/notes.org"
                         "~/Documents/org/emacs.org"
-                        "~/Documents/org/cassandra-training.org"
+                        "~/Documents/org/notes/cassandra-training.org"
                         "~/Documents/org/projects.org"
-                        "~/Documents/org/no-agenda/customer-inbox.org"))
+                        "~/Documents/org/notes/customer-inbox.org"))
 
 (setq org-agenda-text-search-extra-files sli-notes-files)
 ;http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
