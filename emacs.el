@@ -345,6 +345,9 @@ If there is no plausible default, return nil."
                         "~/Documents/org/notes/cassandra-training.org"
                         "~/Documents/org/projects.org"
                         "~/Documents/org/notes/customer-inbox.org"))
+(setq sli-work-agenda
+      (seq-remove (lambda (x) (string-match "privat" x))
+                  org-agenda-files))
 
 (setq org-agenda-text-search-extra-files sli-notes-files)
 ;http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
@@ -398,7 +401,8 @@ If there is no plausible default, return nil."
                             (org-agenda-files (append org-agenda-files sli-notes-files))))))
               ("w" "My Work List"
                ((agenda ""
-                        ((org-agenda-span 'day)))
+                        ((org-agenda-span 'day)
+                         (org-agenda-files sli-work-agenda)))
                 (tags-todo "-Boss/!-TODO"
                            ((org-agenda-tags-todo-honor-ignore-options t)
                             (org-agenda-todo-ignore-scheduled t)
