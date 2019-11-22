@@ -403,7 +403,7 @@ If there is no plausible default, return nil."
                ((agenda ""
                         ((org-agenda-span 'day)
                          (org-agenda-files sli-work-agenda)))
-                (tags-todo "-Boss/!-TODO"
+                (tags-todo "-Boss/!NEXT"
                            ((org-agenda-tags-todo-honor-ignore-options t)
                             (org-agenda-todo-ignore-scheduled t)
                             (org-agenda-todo-ignore-deadlines t))
@@ -411,17 +411,25 @@ If there is no plausible default, return nil."
                 (tags-todo "READ/NEXT"
                            ((org-agenda-files sli-notes-files)
                             (org-agenda-overriding-header "Reading List")))))
-              ("p" "Private stuff"
+              ("d" "Delegated"
                (;;;(agenda "" ((org-agenda-span 'week)))
+                (todo "WAIT"
+                           ((org-agenda-files sli-work-agenda)))))
+              ("p" "Private stuff"
+               ( ;;;(agenda "" ((org-agenda-span 'week)))
                 (tags-todo "-READ/TODO"
-                           ((org-agenda-files '("~/Documents/org/privat.org")))))))))
+                           ((org-agenda-files '("~/Documents/org/privat.org"))))))
+              ("U" tags-tree "+Boss"
+               ((org-show-context-detail 'minimal))))))
 
 (setq org-tag-alist '(("NOTE" . ?n)
                       ("READ" . ?r)
                       ("Qst" . ?f)
                       ("Boss" . ?b)
                       ("Proj" . ?p)
-                      ("Geld" . ?g)))
+                      ("Geld" . ?m)
+                      ("Goal" . ?g)))
+
 (setq org-tags-exclude-from-inheritance '("NOTE" "Proj"))
 
 (setq org-stuck-projects
