@@ -101,14 +101,18 @@ To solve this problem, when your code only knows the relative path of another fi
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
 
+;; ================= General Editing  =====================
+
 (setq column-number-mode t)
 ;; Please avoid tabs
 (setq-default indent-tabs-mode nil)
 (set-face-attribute 'default nil :height 140)
-;; make auto complete always availabe
+;; make auto complete always available
 (add-hook 'after-init-hook 'global-company-mode)
 ;; I prefer manual triggered completion
 (setq company-idle-delay nil)
+;; This will require a key binding.
+;; C-SPC would be nice.  By default it is bound to
 ;; (set-mark-command) I rarely use and it has a secondary binding C-@
 ;; so we can use one binding of this command.
 (global-set-key (kbd "C-SPC") #'company-complete)
@@ -117,9 +121,38 @@ To solve this problem, when your code only knows the relative path of another fi
 (defalias 'list-buffers 'ibuffer)
 
 ;; Configure imenu via helm: lookup buffer contents
-;; shortcut derived from Eclipse C-o
+;; The key binding is derived from Eclipse C-o
 (global-set-key (kbd "C-c o") 'helm-imenu)
 (setf imenu-auto-rescan t)
+
+;; http://ergoemacs.org/emacs/emacs_highlight_parenthesis.html
+(show-paren-mode 1)
+(setq show-paren-style 'expression)
+
+;; https://www.emacswiki.org/emacs/RecentFiles
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+;; key overrides default binding for find-files-read-only
+(global-set-key "\C-x\ \C-r" 'helm-recentf)
+(global-set-key "\C-x\ \C-f" 'helm-find-files)
+(global-set-key (kbd "C-x g") 'magit-status)
+
+;; Whitepspace
+(require 'whitespace)
+;(autoload 'whitespace-mode           "whitespace" "Toggle whitespace visualization."        t)
+(global-whitespace-mode 1)
+(setq whitespace-style (quote
+   ( face trailing tabs newline tab-mark ))) ;newline-mark
+;; https://www.emacswiki.org/emacs/FillColumnIndicator
+(require 'fill-column-indicator)
+(setq fci-rule-column 80)
+
+;; fill-paragraph should adhere to this
+(setq-default fill-column 80)
+(add-hook 'text-mode-hook 'auto-fill-mode)
+(add-hook 'prog-mode-hook 'fci-mode)
+(setq prog-mode-hook nil)
 ;; ================== Helm && Projectile =================
 (require 'helm-config)
 (helm-mode 1)
@@ -133,12 +166,11 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;; exclude maven artifacts
 (add-to-list 'projectile-globally-ignored-directories "target")
+
 ;; ================== Evil =================
 (evil-mode t)
 ;; add evil movements to magit buffers. This changes some magit key bindings
 (require 'evil-magit)
-;; https://github.com/Fanael/relative-line-numbers
-;(linum-relative-global-mode)
 ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
 (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
 (add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
@@ -147,12 +179,11 @@ To solve this problem, when your code only knows the relative path of another fi
 ;; https://emacs.stackexchange.com/questions/31244/how-can-i-disable-evil-in-help-mode
 ;; I prefer this because tab for move to next link is hidden.
 (evil-set-initial-state 'help-mode 'emacs)
-;(add-to-list 'evil-emacs-state-modes 'help-mode)
 ;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
 (fset 'evil-visual-update-x-selection 'ignore)
 ;; This is not Vim like, but helps to eval last expression for lispy languages
 ;; Cursor does not move back when switching to normal-state
-(setq evil-move-cursor-back nil)
+;; (setq evil-move-cursor-back nil)
 ;; enable redo via C-r
 (global-undo-tree-mode)
 (use-package evil-surround
@@ -221,36 +252,6 @@ If there is no plausible default, return nil."
 ;; setup config for Cider Repl
 (add-hook 'clojure-repl-mode-hook #'paredit-mode)
 
-;; ======== END clojure ==========
-
-;; http://ergoemacs.org/emacs/emacs_highlight_parenthesis.html
-(show-paren-mode 1)
-(setq show-paren-style 'expression)
-
-;; https://www.emacswiki.org/emacs-test/RecentFiles
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-;; key overrides default binding for find-files-read-only
-(global-set-key "\C-x\ \C-r" 'helm-recentf)
-(global-set-key "\C-x\ \C-f" 'helm-find-files)
-(global-set-key (kbd "C-x g") 'magit-status)
-
-;; Whitepspace
-(require 'whitespace)
-;(autoload 'whitespace-mode           "whitespace" "Toggle whitespace visualization."        t)
-(global-whitespace-mode 1)
-(setq whitespace-style (quote
-   ( face trailing tabs newline tab-mark ))) ;newline-mark
-;; https://www.emacswiki.org/emacs/FillColumnIndicator
-(require 'fill-column-indicator)
-(setq fci-rule-column 80)
-
-;; fill-paragraph should adhere to this
-(setq-default fill-column 80)
-(add-hook 'text-mode-hook 'auto-fill-mode)
-(add-hook 'prog-mode-hook 'fci-mode)
-(setq prog-mode-hook nil)
 ;; ================= Markdown =================
 (add-hook 'markdown-mode-hook 'fci-mode) ; enable fill-column-indicator
 ;; Normally I write md for github, so use its way of rendering
@@ -268,7 +269,6 @@ If there is no plausible default, return nil."
   (sql-set-product-feature 'postgres
                          :prompt-regexp "^[[:alnum:]_]*=[#>] "))
 
-;;(sql-set-product-feature 'postgres :prompt-length 10)
 ;; ============= GO ==============
 ;; http://arenzana.org/2015/Emacs-for-Go/
 (defun my-go-mode-hook ()
@@ -310,9 +310,9 @@ If there is no plausible default, return nil."
       python-shell-interpreter-args "--simple-prompt -i")
 
 ;;; ============ Octave =========
+;; useful for the ML cousera course
 
 ;; this overrides the setting for objc
-;; useful for the ML cousera course
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
 ;;; ============ ORG ============
