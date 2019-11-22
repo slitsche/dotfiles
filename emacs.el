@@ -4,57 +4,16 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 
 ;; https://www.masteringemacs.org/article/what-is-new-in-emacs-24-part-2
-;(setq package-enable-at-startup nil)
+(setq package-enable-at-startup nil)
 
-(defun ensure-package-installed (&rest packages)
-  "Assure every package is installed, ask for installation if it’s not.
+(package-install-selected-packages)
 
-Return a list of installed packages or nil for every skipped package."
-  (mapcar
-   (lambda (package)
-     (if (package-installed-p package)
-         nil
-       (if (y-or-n-p (format "Package %s is missing. Install it? " package))
-           (package-install package)
-         package)))
-   packages))
-
-;; Make sure to have downloaded archive description.
-(or (file-exists-p package-user-dir)
-    (package-refresh-contents))
+(package-initialize)
 
 ;; Activate installed packages
 (add-to-list 'load-path "~/.emacs.d/evil")
 (add-to-list 'load-path "~/.emacs.d/evil-magit")
 (require 'evil)
-(package-initialize)
-
-(ensure-package-installed
-                          'cider
-                          'clj-refactor
-                          'clojure-mode
-                          'company
-                          ;'evil
-                          ;'evil-magit
-                          'elfeed
-                          'fill-column-indicator
-                          'go-autocomplete
-                          'go-eldoc
-                          'go-mode
-                          'helm
-                          'helm-projectile
-                          ;; for html export from org-mode
-                          'htmlize
-                          'ibuffer
-                          'magit
-                          ;'magit-gh-pulls
-                          'markdown-mode
-                          'org-bullets
-                          'paredit
-                          'projectile
-                          'slime
-                          'use-package
-                          'yaml-mode)
 
 ;; https://github.com/jwiegley/use-package
 (eval-when-compile
@@ -506,4 +465,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy)))
  '(package-selected-packages
    (quote
-    (dimmer dockerfile-mode cider org-static-blog company-emacs-eclim eclim octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit linum-relative helm-projectile go-eldoc go-autocomplete fill-column-indicator clj-refactor))))
+    (paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
