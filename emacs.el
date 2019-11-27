@@ -347,12 +347,12 @@ If there is no plausible default, return nil."
                ((todo "TODO"
                       ((org-agenda-files '("~/Documents/org/inbox.org"))
                        (org-agenda-overriding-header "New Items")))
-                (tags-todo "-Boss-READ/TODO"
+                (tags-todo "-Boss/!TODO"
                            ((org-agenda-overriding-header "Next Todos")
                             (org-agenda-tags-todo-honor-ignore-options t)
                             (org-agenda-todo-ignore-scheduled t)
                             (org-agenda-todo-ignore-deadlines t)))
-                (tags-todo "+READ/TODO"
+                (tags-todo "+READ/!TODO"
                            ((org-agenda-overriding-header "Next Read")
                             (org-agenda-tags-todo-honor-ignore-options t)
                             (org-agenda-todo-ignore-scheduled t)
@@ -362,13 +362,14 @@ If there is no plausible default, return nil."
                ((agenda ""
                         ((org-agenda-span 'day)
                          (org-agenda-files sli-work-agenda)))
-                (tags-todo "-Boss/!NEXT"
+                (tags-todo "-Boss-READ/!NEXT"
                            ((org-agenda-tags-todo-honor-ignore-options t)
                             (org-agenda-todo-ignore-scheduled t)
-                            (org-agenda-todo-ignore-deadlines t))
+                            (org-agenda-todo-ignore-deadlines t)
+                            (org-agenda-files (append sli-work-agenda sli-notes-files)))
                            nil)
-                (tags-todo "READ/NEXT"
-                           ((org-agenda-files sli-notes-files)
+                (tags-todo "READ/!NEXT"
+                           ((org-agenda-files (append org-agenda-files sli-notes-files))
                             (org-agenda-overriding-header "Reading List")))))
               ("d" "Delegated"
                (;;;(agenda "" ((org-agenda-span 'week)))
