@@ -216,6 +216,8 @@ If there is no plausible default, return nil."
 ;; Normally I write md for github, so use its way of rendering
 (setq markdown-command "pandoc -f markdown_github -t html")
 
+(use-package highlight-indentation
+  :init (add-hook 'yaml-mode-hook #'highlight-indentation-mode))
 
 ;; ================= SQL =================
 (setq sql-font-lock-buffers '(sql-mode sql-interactive-mode))
@@ -451,6 +453,11 @@ If there is no plausible default, return nil."
       '("http://nullprogram.com/feed/"
         "http://planet.emacsen.org/atom.xml"
         "http://sreweekly.com/feed/"))
+(setq calendar-location-name "Berlin, Germany")
+(setq calendar-latitude 52.52)
+(setq calendar-longitude 13.40)
+(require 'theme-changer)
+(change-theme 'dichromacy 'tsdh-dark)
 ;;
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -466,4 +473,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy)))
  '(package-selected-packages
    (quote
-    (paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
+    (gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
