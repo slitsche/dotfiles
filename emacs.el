@@ -63,6 +63,7 @@ To solve this problem, when your code only knows the relative path of another fi
 ;; ================= General Editing  =====================
 
 (setq column-number-mode t)
+(global-hl-line-mode 1)
 ;; Please avoid tabs
 (setq-default indent-tabs-mode nil)
 (set-face-attribute 'default nil :height 140)
