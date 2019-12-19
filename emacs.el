@@ -296,6 +296,9 @@ If there is no plausible default, return nil."
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "WAIT(w)" "|" "DONE(d)")))
 
+;; The following is important to be able to get my worklog from
+;; various files and nodes using agenda and log-mode
+(setq org-log-done 'time)
 (setq org-catch-invisible-edits 'show-and-error)
 (setq org-directory "~/Documents/org")
 (setq org-agenda-files (list "~/Documents/org/gtd.org"
