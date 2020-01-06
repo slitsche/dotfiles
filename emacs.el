@@ -333,6 +333,12 @@ If there is no plausible default, return nil."
         ("n" "note" entry
          (file "inbox.org")
          "* %?\n%U")
+        ("o" "Orga" entry
+         (file+headline "gtd.org" "Orga Stuff")
+         "* DONE %^{Title}\n%T\n%?")
+        ("c" "Consulting" entry
+         (file+headline "gtd.org" "Consulting")
+         "* DONE %^{Title}\n%T\n%?")
         ("j" "Journal" entry
          (file+datetree "no-agenda/worklog.org")
          "*** %?\n%U"
@@ -391,6 +397,8 @@ If there is no plausible default, return nil."
 (setq org-tag-alist '(("NOTE" . ?n)
                       ("READ" . ?r)
                       ("Qst" . ?f)
+                      ("ORGA" . ?o)
+                      ("CONS" . ?c)
                       ("Boss" . ?b)
                       ("Proj" . ?p)
                       ("Geld" . ?m)
