@@ -294,13 +294,16 @@ If there is no plausible default, return nil."
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "WAIT(w)" "|" "DONE(d)")))
+      '((sequence "TODO(t)" "NEXT(n)" "WAIT(w)" "|" "DONE(d)")
+        (type  "MEET")))
 
 ;; The following is important to be able to get my worklog from
 ;; various files and nodes using agenda and log-mode
 (setq org-log-done 'time)
+(setq org-log-into-drawer t)
 (setq org-catch-invisible-edits 'show-and-error)
 (setq org-directory "~/Documents/org")
+(setq org-agenda-diary-file (concat org-directory "/diary.org"))
 (setq org-agenda-files (list "~/Documents/org/gtd.org"
                              "~/Documents/org/todo.org"
                              "~/Documents/org/privat.org"
@@ -338,7 +341,8 @@ If there is no plausible default, return nil."
          "* DONE %^{Title}\n%T\n%?")
         ("c" "Consulting" entry
          (file+headline "gtd.org" "Consulting")
-         "* DONE %^{Title}\n%T\n%?")
+         "* MEET %^{Title}\n%T\n%?"
+         :clock-in t)
         ("j" "Journal" entry
          (file+datetree "no-agenda/worklog.org")
          "*** %?\n%U"
