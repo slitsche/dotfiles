@@ -338,10 +338,14 @@ If there is no plausible default, return nil."
          "* %?\n%U")
         ("o" "Orga" entry
          (file+headline "gtd.org" "Orga Stuff")
-         "* DONE %^{Title}\n%T\n%?")
+         "* DONE %^{Title}\nCLOSED: %U\n%?")
         ("c" "Consulting" entry
          (file+headline "gtd.org" "Consulting")
          "* MEET %^{Title}\n%T\n%?"
+         :clock-in t)
+        ("m" "Meeting" entry
+         (file "todo.org")
+         "* MEET %^{Title}\n%U\n%?"
          :clock-in t)
         ("j" "Journal" entry
          (file+datetree "no-agenda/worklog.org")
