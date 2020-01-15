@@ -345,12 +345,11 @@ If there is no plausible default, return nil."
          :clock-in t)
         ("m" "Meeting" entry
          (file "todo.org")
-         "* MEET %^{Title}\n%U\n%?"
+         "* MEET %^{Title}\nCLOSED: %U\n%?"
          :clock-in t)
         ("j" "Journal" entry
-         (file+datetree "no-agenda/worklog.org")
-         "*** %?\n%U"
-         :tree-type 'week)
+         (file "todo.org")
+         "*** %?\nCLOSED: %U")
         ("h" "Health" entry
          (file+datetree "no-agenda/health.org")
          "*** %?\n%U"
