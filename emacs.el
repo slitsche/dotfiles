@@ -100,10 +100,20 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;; Whitepspace
 (require 'whitespace)
-;(autoload 'whitespace-mode           "whitespace" "Toggle whitespace visualization."        t)
+;Toggle whitespace visualization.
 (global-whitespace-mode 1)
 (setq whitespace-style (quote
    ( face trailing tabs newline tab-mark ))) ;newline-mark
+
+;; Mostly I want to avoid trailing whitespace.  That's why I want to clean up
+;; those always.  I could only do harm when working on other people files.
+;; Then we could git revert and introduce a whitespace commit.
+;; https://emacs.stackexchange.com/questions/14466/how-to-run-an-after-save-hook-only-when-the-buffer-has-been-saved-manually
+(defun sli-after-save-action ()
+  "Used in `after-save-hook`.  Triggered only for save actions from `save-buffer`."
+  (when (memq this-command '(save-buffer save-some-buffers))
+    (delete-trailing-whitespace)))
+(add-hook 'after-save-hook 'sli-after-save-action)
 ;; https://www.emacswiki.org/emacs/FillColumnIndicator
 (require 'fill-column-indicator)
 (setq fci-rule-column 80)
@@ -341,7 +351,7 @@ If there is no plausible default, return nil."
          "* DONE %^{Title}\nCLOSED: %U\n%?")
         ("c" "Consulting" entry
          (file+headline "gtd.org" "Consulting")
-         "* MEET %^{Title}\n%T\n%?"
+         "* MEET %^{Title}\nCLOSED: %U\n%?"
          :clock-in t)
         ("m" "Meeting" entry
          (file "todo.org")
@@ -352,8 +362,7 @@ If there is no plausible default, return nil."
          "*** %?\nCLOSED: %U")
         ("h" "Health" entry
          (file+datetree "no-agenda/health.org")
-         "*** %?\n%U"
-        )))
+         "*** %?\n%U")))
 
 ;; http://doc.norang.ca/org-mode.html#CustomAgendaViews
 ;; https://emacs.stackexchange.com/questions/12517/how-do-i-make-the-timespan-shown-by-org-agenda-start-yesterday
