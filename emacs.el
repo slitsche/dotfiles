@@ -290,9 +290,15 @@ If there is no plausible default, return nil."
 ;;; ============ ORG ============
 (require 'org)
 (require 'org-bullets)
+
+(defun sli-work-agenda ()
+  (interactive)
+  (org-agenda nil "w"))
+
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
+(global-set-key (kbd "<f12>") 'sli-work-agenda)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
  ;; Make windmove work in org-mode:
