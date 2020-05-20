@@ -136,6 +136,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;; exclude maven artifacts
 (add-to-list 'projectile-globally-ignored-directories "target")
+(append '("~" ".class" "out") projectile-globally-ignored-files)
 
 ;; ================== Evil =================
 (evil-mode t)
