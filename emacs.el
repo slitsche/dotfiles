@@ -126,18 +126,25 @@ To solve this problem, when your code only knows the relative path of another fi
 ;; ================== Helm && Projectile =================
 (require 'helm-config)
 (helm-mode 1)
-(projectile-global-mode)
-(setq projectile-enable-caching t)
-(setq projectile-completion-system 'helm)
-;; automatically regenerate the tags
-(setq projectile-idle-timer t)
-(setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
-(add-hook 'projectile-idle-timer-hook #'projectile-invalidate-cache)
 
-;; exclude maven artifacts
-(add-to-list 'projectile-globally-ignored-directories "target")
-(append '("~" ".class" "out") projectile-globally-ignored-files)
+(use-package projectile
+  :init
+  (setq projectile-keymap-prefix (kbd "C-c p"))
+  :config
+  (setq projectile-enable-caching t)
+  ;; automatically regenerate the tags
+  (setq projectile-idle-timer t)
+  (setq projectile-mode-line-prefix "P")
+  ;(setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
+  (setq projectile-mode-line-function '(lambda () (format " Proj[%s]" (projectile-project-name))))
+  (projectile-mode +1))
 
+;(require 'helm-projectile)
+;(helm-projectile-on)
+
+(use-package helm-projectile
+  :config
+  (helm-projectile-on))
 ;; ================== Evil =================
 (evil-mode t)
 ;; add evil movements to magit buffers. This changes some magit key bindings
@@ -508,4 +515,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy)))
  '(package-selected-packages
    (quote
-    (gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
+    (ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
