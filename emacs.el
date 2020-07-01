@@ -2,6 +2,7 @@
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
 ;; https://www.masteringemacs.org/article/what-is-new-in-emacs-24-part-2
 (setq package-enable-at-startup nil)
@@ -230,6 +231,10 @@ If there is no plausible default, return nil."
 ;; setup config for Cider Repl
 (add-hook 'clojure-repl-mode-hook #'paredit-mode)
 
+;; ================= Scala =================
+(use-package scala-mode
+  :mode "\\.s\\(cala\\|bt\\)$")
+
 ;; ================= Markdown =================
 (add-hook 'markdown-mode-hook 'fci-mode) ; enable fill-column-indicator
 ;; Normally I write md for github, so use its way of rendering
@@ -450,7 +455,7 @@ If there is no plausible default, return nil."
 ;; I want to clean up my todo file which is a long list of TODOs and DONE in between
 ;; https://stackoverflow.com/a/27043756/4096511
 ;; the last parameter can be 'tree or 'agenda
-(defun org-archive-done-tasks ()
+(defun sli-archive-done-tasks ()
   (interactive)
   (org-map-entries
    (lambda ()
@@ -458,13 +463,41 @@ If there is no plausible default, return nil."
      (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
    "/DONE" 'file))
 
+(defun sli-report-worklog ()
+  "Report on all consulting actions from worklog"
+  (interactive)
+  (message
+   (format "Consultings: %d"
+           (length
+            (org-map-entries t "CONS" 'tree)))))
+
+(defun sli-read-datetree-date (d)
+  "Parse a time string D and return a date to pass to the datetree functions."
+  (let ((dtmp (nthcdr 3 (parse-time-string d))))
+    (list (cadr dtmp) (car dtmp) (caddr dtmp))))
+
+(defun sli-refile-to-archive-datetree (&optional bfn)
+  "Refile an entry to a datetree under an archive."
+  (interactive)
+  (require 'org-datetree)
+  (let* ((bfn    (or bfn
+                     (find-file-noselect
+                      (expand-file-name "~/Documents/org/no-agenda/worklog.org"))))
+         (datetree-date (sli-read-datetree-date (org-read-date t nil)))
+         (target-pos  (with-current-buffer bfn
+                                (save-excursion
+                                  (org-datetree-find-date-create datetree-date)
+                                  (point)))))
+    (org-refile nil nil (list nil (buffer-file-name bfn) nil target-pos)))
+  (setq this-command 'my/org-refile-to-journal))
+
 ;; Setup Org Babel
 (require 'ob-clojure)
 (setq org-babel-clojure-backend 'cider)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((sql . t)
-   (sh . t)
+   ;;(sh . t)
    (emacs-lisp . t)
    (clojure . t)))
 
@@ -512,6 +545,9 @@ If there is no plausible default, return nil."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
+ '(browse-url-browser-function (quote browse-url-default-browser))
  '(custom-enabled-themes (quote (dichromacy)))
  '(package-selected-packages
    (quote
