@@ -133,7 +133,7 @@ To solve this problem, when your code only knows the relative path of another fi
   :config
   (setq projectile-enable-caching t)
   ;; automatically regenerate the tags
-  (setq projectile-idle-timer t)
+  (setq projectile-enable-idle-timer t)
   (setq projectile-mode-line-prefix "P")
   ;(setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
   (setq projectile-mode-line-function '(lambda () (format " Proj[%s]" (projectile-project-name))))
