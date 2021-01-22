@@ -439,6 +439,7 @@ If there is no plausible default, return nil."
                       ("Boss" . ?b)
                       ("Proj" . ?p)
                       ("Geld" . ?m)
+                      ("PE" . ?e)
                       ("Goal" . ?g)))
 
 (setq org-tags-exclude-from-inheritance '("NOTE" "Proj"))
