@@ -1,8 +1,8 @@
 (require 'package)
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
 ;; https://www.masteringemacs.org/article/what-is-new-in-emacs-24-part-2
 (setq package-enable-at-startup nil)
@@ -133,7 +133,7 @@ To solve this problem, when your code only knows the relative path of another fi
   :config
   (setq projectile-enable-caching t)
   ;; automatically regenerate the tags
-  (setq projectile-enable-idle-timer t)
+  ;; (setq projectile-enable-idle-timer t)
   (setq projectile-mode-line-prefix "P")
   ;(setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
   (setq projectile-mode-line-function '(lambda () (format " Proj[%s]" (projectile-project-name))))
@@ -253,27 +253,9 @@ If there is no plausible default, return nil."
   (sql-set-product-feature 'postgres
                          :prompt-regexp "^[[:alnum:]_]*=[#>] "))
 
-;; ============= GO ==============
-;; http://arenzana.org/2015/Emacs-for-Go/
-(defun my-go-mode-hook ()
-  (setq compile-command "go build -v && go test -v && go vet && golint")
-  (define-key (current-local-map) "\C-c\C-c" 'compile)
-  (go-eldoc-setup)
-  (setq gofmt-command "goimports") ;; manages imports
-  (add-hook 'before-save-hook 'gofmt-before-save)
-  (setq tab-width 4)
-  ;(local-set-key (kbd "C-]") 'godef-jump) ;; TODO: evil has C-]
-  )
-
-(add-hook 'go-mode-hook 'my-go-mode-hook)
-;; autocomplete: TODO: check this again if necessary after adding 'company
-;;(ac-config-default)
-;;(require 'auto-complete-config)
-;; (require 'go-autocomplete)
-
-;; configure Lint
-(add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
-;(require 'golint)
+;; ============= Racket ==============
+(use-package racket-mode
+             :ensure t)
 
 ;; ============= Lisp ==============
 (require 'slime)
@@ -554,4 +536,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy)))
  '(package-selected-packages
    (quote
-    (magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
+    (racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
