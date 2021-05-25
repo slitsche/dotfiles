@@ -233,7 +233,16 @@ If there is no plausible default, return nil."
 ;; ================= Scala =================
 (use-package scala-mode
   :mode "\\.s\\(cala\\|bt\\)$")
-
+;; After upgrade to sbt 1 the sbt prompt showed escapt characters.
+;; the simplest way to get rid of it is using sbt-mode
+(use-package sbt-mode
+  :commands sbt-start sbt-command
+  :config
+  ;; WORKAROUND: allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map))
 ;; ================= Markdown =================
 (add-hook 'markdown-mode-hook 'fci-mode) ; enable fill-column-indicator
 ;; Normally I write md for github, so use its way of rendering
