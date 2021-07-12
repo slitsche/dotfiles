@@ -44,9 +44,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (server-start)
 (tool-bar-mode 0)
 
-;; We want the active buffer more present then the others
-(dimmer-mode)
-(setq dimmer-fraction 0.4)
 ;;https://www.masteringemacs.org/article/disabling-prompts-emacs
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
