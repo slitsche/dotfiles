@@ -131,6 +131,14 @@ To solve this problem, when your code only knows the relative path of another fi
   (setq projectile-enable-caching t)
   ;; automatically regenerate the tags
   ;; (setq projectile-enable-idle-timer t)
+  (setq projectile-create-missing-test-files t)
+  // Addressing issue for sbt: https://github.com/bbatsov/projectile/issues/1650
+  (projectile-update-project-type
+     'sbt
+     :src-dir
+     (lambda (file-path) (projectile-complementary-dir file-path "test" "main"))
+     :test-dir
+     (lambda (file-path) (projectile-complementary-dir file-path "main" "test")))
   (setq projectile-mode-line-prefix "P")
   ;(setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
   (setq projectile-mode-line-function '(lambda () (format " Proj[%s]" (projectile-project-name))))
