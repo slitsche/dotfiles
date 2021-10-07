@@ -132,7 +132,7 @@ To solve this problem, when your code only knows the relative path of another fi
   ;; automatically regenerate the tags
   ;; (setq projectile-enable-idle-timer t)
   (setq projectile-create-missing-test-files t)
-  // Addressing issue for sbt: https://github.com/bbatsov/projectile/issues/1650
+  ;; Addressing issue for sbt: https://github.com/bbatsov/projectile/issues/1650
   (projectile-update-project-type
      'sbt
      :src-dir
@@ -550,4 +550,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy)))
  '(package-selected-packages
    (quote
-    (racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
+    (evil-collection racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
