@@ -349,6 +349,18 @@ If there is no plausible default, return nil."
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))
                            (sli-notes-files . (:maxlevel . 3))
                            (("~/Documents/org/someday.org") . (:maxlevel . 3))))
+
+;; https://dindi.garjola.net/zettelkustom.html
+(defun sli-zettel-template ()
+  "* %?\n:PROPERTIES:\n:DATE_CREATED: %U\n:FROM: %a\n:END:\n%i\n")
+
+(require 'org-id)
+(setq org-id-link-to-org-use-id t)
+
+(require 'org-ql)
+(require 'org-ql-view)
+
+
 ;https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
 (setq org-capture-templates
       '(("t" "Todo task inbox" entry
@@ -379,7 +391,11 @@ If there is no plausible default, return nil."
          "*** %?\nCLOSED: %U")
         ("h" "Health" entry
          (file+datetree "no-agenda/health.org")
-         "*** %?\n%U")))
+         "*** %?\n%U")
+        ("s" "Segeln" entry
+         (file+headline "notes/segeln.org" "Zettels")
+         (function sli-zettel-template)
+         :empty-lines 1)))
 
 ;; http://doc.norang.ca/org-mode.html#CustomAgendaViews
 ;; https://emacs.stackexchange.com/questions/12517/how-do-i-make-the-timespan-shown-by-org-agenda-start-yesterday
@@ -550,4 +566,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy)))
  '(package-selected-packages
    (quote
-    (evil-collection racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
+    (org-ql evil-collection deft racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
