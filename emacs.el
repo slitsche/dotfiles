@@ -339,7 +339,8 @@ If there is no plausible default, return nil."
                         "~/Documents/org/emacs.org"
                         "~/Documents/org/notes/cassandra-training.org"
                         "~/Documents/org/projects.org"
-                        "~/Documents/org/notes/customer-inbox.org"))
+                        "~/Documents/org/notes/customer-inbox.org"
+                        "~/Documents/org/notes/segeln.org"))
 (setq sli-work-agenda
       (seq-remove (lambda (x) (string-match "privat" x))
                   org-agenda-files))
@@ -355,11 +356,22 @@ If there is no plausible default, return nil."
   "* %?\n:PROPERTIES:\n:DATE_CREATED: %U\n:FROM: %a\n:END:\n%i\n")
 
 (require 'org-id)
+;; if we store a link we want to generate an id-property
 (setq org-id-link-to-org-use-id t)
 
 (require 'org-ql)
 (require 'org-ql-view)
 
+;; inspired by https://dindi.garjola.net/zettelkustom.html
+(defun sli-zettel-backlinks ()
+  (interactive)
+  (let* ((id (org-entry-get (point) "ID"))
+         (query (cond (id `(link :target ,(concat "id:" id)))
+                      (t (error "Entry has no ID property"))))
+         (helm-query (concat "link:target=" (concat "\"" "id:" id "\"")))
+         (title (concat "Links to: " (org-get-heading t t)))
+         (org-agenda-tag-filter nil))
+    (org-ql-search sli-notes-files query :title title)))
 
 ;https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
 (setq org-capture-templates
@@ -566,4 +578,4 @@ If there is no plausible default, return nil."
  '(custom-enabled-themes (quote (dichromacy)))
  '(package-selected-packages
    (quote
-    (org-ql evil-collection deft racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
+    (helm-org-ql org-ql evil-collection deft racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
