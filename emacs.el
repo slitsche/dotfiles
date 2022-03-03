@@ -401,6 +401,9 @@ If there is no plausible default, return nil."
         ("j" "Journal" entry
          (file "todo.org")
          "*** %?\nCLOSED: %U")
+        ("e" "Event log" entry
+         (file+datetree "notes/eventlog.org")
+         "*** %?\n%U")
         ("h" "Health" entry
          (file+datetree "no-agenda/health.org")
          "*** %?\n%U")
