@@ -2,6 +2,12 @@
 ;;; ============ ORG ============
 (require 'org)
 (require 'org-bullets)
+(require 'org-id)
+(require 'org-datetree)
+(require 'ob-clojure)
+(require 'org-ql)
+(require 'org-ql-view)
+;; (require 'helm-org-ql)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
@@ -17,10 +23,10 @@
 
 ;; Setup folder structure
 (setq org-directory "~/Documents/org")
-(setq org-agenda-diary-file (concat org-directory "/diary.org"))
 (setq org-agenda-files (list "~/Documents/org/gtd.org"
                              "~/Documents/org/todo.org"
                              "~/Documents/org/privat.org"
+                             "~/Documents/org/inbox.org"
                              "~/Documents/org/networking.org"))
 (setq sli-notes-files '("~/Documents/org/notes.org"
                         "~/Documents/org/emacs.org"
@@ -28,16 +34,21 @@
                         "~/Documents/org/projects.org"
                         "~/Documents/org/notes/customer-inbox.org"
                         "~/Documents/org/notes/segeln.org"))
+
+;; My daily work agenda
 (defun sli-work-agenda ()
   (interactive)
   (org-agenda nil "w"))
 
+;; Define a set of different files
 (setq sli-work-agenda
       (seq-remove (lambda (x) (string-match "privat" x))
                   org-agenda-files))
 
 (setq org-agenda-text-search-extra-files sli-notes-files)
-;http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
+
+;; In order to organize references we add notes to the refile targets
+;; http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))
                            (sli-notes-files . (:maxlevel . 3))
                            (("~/Documents/org/someday.org") . (:maxlevel . 3))))
@@ -46,13 +57,8 @@
 (defun sli-zettel-template ()
   "* %?\n:PROPERTIES:\n:DATE_CREATED: %U\n:FROM: %a\n:END:\n%i\n")
 
-(require 'org-id)
 ;; if we store a link we want to generate an id-property
 (setq org-id-link-to-org-use-id t)
-
-(require 'org-ql)
-(require 'org-ql-view)
-;; (require 'helm-org-ql)
 
 ;; inspired by https://dindi.garjola.net/zettelkustom.html
 (defun sli-zettel-backlinks ()
@@ -89,12 +95,12 @@
          "* MEET %^{Title}\nCLOSED: %U\n%?"
          :clock-in t)
         ("m" "Meeting" entry
-         (file "todo.org")
+         (file "inbox.org")
          "* MEET %^{Title}\nCLOSED: %U\n%?"
          :clock-in t)
         ("j" "Journal" entry
          (file "todo.org")
-         "*** %?\nCLOSED: %U")
+         "* DONE %?\nCLOSED: %U")
         ("e" "Event log" entry
          (file+datetree "notes/eventlog.org")
          "*** %?\n%U")
@@ -203,7 +209,6 @@
 (defun sli-refile-to-archive-datetree (&optional bfn)
   "Refile an entry to a datetree under an archive."
   (interactive)
-  (require 'org-datetree)
   (let* ((bfn    (or bfn
                      (find-file-noselect
                       (expand-file-name "~/Documents/org/no-agenda/worklog.org"))))
@@ -216,7 +221,6 @@
   (setq this-command 'my/org-refile-to-journal))
 
 ;; Setup Org Babel
-(require 'ob-clojure)
 (setq org-babel-clojure-backend 'cider)
 (org-babel-do-load-languages
  'org-babel-load-languages
