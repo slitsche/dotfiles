@@ -28,10 +28,13 @@
                              "~/Documents/org/privat.org"
                              "~/Documents/org/inbox.org"
                              "~/Documents/org/networking.org"))
+
+;; in emacs 26 changing it requires restart
 (setq sli-notes-files '("~/Documents/org/notes.org"
                         "~/Documents/org/emacs.org"
                         "~/Documents/org/notes/cassandra-training.org"
                         "~/Documents/org/projects.org"
+                        "~/Documents/org/someday.org"
                         "~/Documents/org/notes/customer-inbox.org"
                         "~/Documents/org/notes/segeln.org"))
 
