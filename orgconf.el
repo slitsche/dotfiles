@@ -67,14 +67,14 @@
 (defun sli-zettel-backlinks ()
   (interactive)
   (let* ((id (org-entry-get (point) "ID"))
-         (query (cond (id `(link :target ,(concat "id:" id)))
+         (query (cond (id `(link :target ,(concat "id:" id )))
                       (t (error "Entry has no ID property"))))
-         (helm-query (concat "link:target=" (concat "\"" "id:" id "\"")))
+         ;; (helm-query (concat "link:target=" (concat "\"" "id:" id "\"")))
          (title (concat "Links to: " (org-get-heading t t)))
          (org-agenda-tag-filter nil))
     ;; (message helm-query)
     ;; (helm-org-ql sli-notes-files :name helm-query)
-    (org-ql-search sli-notes-files query :title title)))
+    (org-ql-search (append sli-work-agenda sli-notes-files) query :title title)))
 
 ;https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
 (setq org-capture-templates
