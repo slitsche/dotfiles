@@ -11,14 +11,55 @@
 
 (package-initialize)
 
-;; Activate installed packages
-(add-to-list 'load-path "~/.emacs.d/evil")
-(require 'evil)
-
 ;; https://github.com/jwiegley/use-package
 (eval-when-compile
   (require 'use-package))
 
+;; ================== Evil =================
+
+;; help-mode is in evil-motion-state-mode, there for change initial state
+;; https://emacs.stackexchange.com/questions/31244/how-can-i-disable-evil-in-help-mode
+;; I prefer this because tab for move to next link is hidden.
+;; (evil-set-initial-state 'help-mode 'emacs)
+
+;; This is not Vim like, but helps to eval last expression for lispy languages
+;; Cursor does not move back when switching to normal-state
+;; (setq evil-move-cursor-back nil)
+;; enable redo via C-r
+;; (global-undo-tree-mode)
+(use-package evil
+:init
+(progn
+    (setq evil-undo-system 'undo-tree)
+    ;; `evil-collection' assumes `evil-want-keybinding' is set to
+    ;; `nil' before loading `evil' and `evil-collection'
+    ;; @see https://github.com/emacs-evil/evil-collection#installation
+    (setq evil-want-keybinding nil)
+    )
+:config
+(progn
+  (evil-mode 1)
+  ;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
+  (add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
+  (add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
+  (add-to-list 'evil-emacs-state-modes 'elfeed-search-mode)
+  (add-to-list 'evil-emacs-state-modes 'info-mode)
+  ;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
+  (fset 'evil-visual-update-x-selection 'ignore)
+  ))
+
+(use-package evil-collection
+    :after evil
+    :ensure t
+    :config
+    (evil-collection-init))
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
+;; ================== General stuff =================
 ;; http://ergoemacs.org/emacs/organize_your_dot_emacs.html
 (defun xah-get-fullpath (@file-relative-path)
   "Return the full path of *file-relative-path, relative to caller's file location.
@@ -150,30 +191,6 @@ To solve this problem, when your code only knows the relative path of another fi
 (use-package helm-projectile
   :config
   (helm-projectile-on))
-;; ================== Evil =================
-(evil-mode t)
-;; add evil movements to magit buffers. This changes some magit key bindings
-(require 'evil-magit)
-;; http://blog.aaronbieber.com/2016/01/23/living-in-evil.html
-(add-to-list 'evil-emacs-state-modes 'cider-stacktrace-mode)
-(add-to-list 'evil-emacs-state-modes 'elfeed-show-mode)
-(add-to-list 'evil-emacs-state-modes 'elfeed-search-mode)
-;; help-mode is in evil-motion-state-mode, there for change initial state
-;; https://emacs.stackexchange.com/questions/31244/how-can-i-disable-evil-in-help-mode
-;; I prefer this because tab for move to next link is hidden.
-(evil-set-initial-state 'help-mode 'emacs)
-;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
-(fset 'evil-visual-update-x-selection 'ignore)
-;; This is not Vim like, but helps to eval last expression for lispy languages
-;; Cursor does not move back when switching to normal-state
-;; (setq evil-move-cursor-back nil)
-;; enable redo via C-r
-(global-undo-tree-mode)
-(use-package evil-surround
-  :ensure t
-  :config
-  (global-evil-surround-mode 1))
-
 ;; ================== Clojure =================
 (defun sli-find-tag-default-bounds ()
   "Determine the boundaries of the default tag, based on text at point.
@@ -363,6 +380,7 @@ If there is no plausible default, return nil."
    ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
  '(browse-url-browser-function (quote browse-url-default-browser))
  '(custom-enabled-themes (quote (dichromacy)))
+ '(helm-completion-style (quote helm))
  '(package-selected-packages
    (quote
-    (helm-org-ql org-ql evil-collection deft racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
+    (evil helm-org-ql org-ql evil-collection deft racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
