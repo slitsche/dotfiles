@@ -50,6 +50,13 @@
 
 (setq org-agenda-text-search-extra-files sli-notes-files)
 
+;; I want to see the ancestors when I jump from agenda into tree
+(setq org-show-context-detail
+      '((agenda . ancestors)
+        (bookmark-jump . lineage)
+        (isearch . lineage)
+        (default . ancestors)))
+
 ;; In order to organize references we add notes to the refile targets
 ;; http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 3))
