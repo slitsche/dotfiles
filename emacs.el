@@ -25,8 +25,10 @@
 ;; This is not Vim like, but helps to eval last expression for lispy languages
 ;; Cursor does not move back when switching to normal-state
 ;; (setq evil-move-cursor-back nil)
+
 ;; enable redo via C-r
-;; (global-undo-tree-mode)
+(global-undo-tree-mode)
+
 (use-package evil
 :init
 (progn
