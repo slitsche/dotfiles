@@ -88,15 +88,17 @@
       '(("t" "Todo task inbox" entry
          (file "inbox.org")
          "* TODO %?\n%U")
-        ("T" "Todo task (active)" entry
-         (file "todo.org")
-         "* TODO %^{Title}\n%U\n%?")
         ("r" "read" entry
          (file "inbox.org")
          "* %? :READ:\n%U\n")
         ("n" "note" entry
          (file "inbox.org")
-         "* %?\n%U")
+         "* %?\n%U"
+         :empty-lines-after 1)
+        ("f" "folgezettel" entry
+         (file "inbox.org")
+         (function sli-zettel-template)
+         :empty-lines-after 1)
         ("o" "Orga" entry
          (file+headline "gtd.org" "Orga Stuff")
          "* DONE %^{Title}\nCLOSED: %U\n%?")
