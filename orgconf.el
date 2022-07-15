@@ -183,6 +183,10 @@
 
 (setq org-tags-exclude-from-inheritance '("NOTE" "Proj"))
 
+(setq org-sort-agenda-noeffort-is-high nil)
+(setq org-global-properties
+      '(("Effort_ALL". "0:10 0:30 1:00 2:00")))
+
 (setq org-stuck-projects
       '("+Proj/-DONE" ("NEXT" "WAIT") nil nil))
 (add-to-list 'org-structure-template-alist
