@@ -170,15 +170,17 @@
               ("U" tags-tree "+Boss"
                ((org-show-context-detail 'minimal))))))
 
-(setq org-tag-alist '(("NOTE" . ?n)
-                      ("READ" . ?r)
-                      ("Qst" . ?f)
-                      ("ORGA" . ?o)
-                      ("CONS" . ?c)
+(setq org-tag-alist '(
                       ("Boss" . ?b)
-                      ("Proj" . ?p)
-                      ("Geld" . ?m)
+                      ("CONS" . ?c)
                       ("PE" . ?e)
+                      ("Qst" . ?f)
+                      ("Geld" . ?m)
+                      ("NOTE" . ?n)
+                      ("ORGA" . ?o)
+                      ("Proj" . ?p)
+                      ("READ" . ?r)
+                      ("TEAM" . ?t)
                       ("Goal" . ?g)))
 
 (setq org-tags-exclude-from-inheritance '("NOTE" "Proj"))
