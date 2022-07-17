@@ -150,11 +150,16 @@ To solve this problem, when your code only knows the relative path of another fi
 ;; those always.  I could only do harm when working on other people files.
 ;; Then we could git revert and introduce a whitespace commit.
 ;; https://emacs.stackexchange.com/questions/14466/how-to-run-an-after-save-hook-only-when-the-buffer-has-been-saved-manually
-(defun sli-before-save-action ()
-  "Used in `after-save-hook`.  Triggered only for save actions from `save-buffer`."
-  (when (memq this-command '(save-buffer save-some-buffers))
-    (delete-trailing-whitespace)))
-(add-hook 'before-save-hook 'sli-before-save-action)
+;; 2022-07-17
+;; Now I prefer auto-save-visited-mode.  Its call to save is not a command.
+;; therefore the value of `this-command` is nil.  Disabling it and observing negative effects.
+;; It means the function could be simplified to check whether `this-command` is non nil.
+;; (defun sli-before-save-action ()
+;;   "Used in `before-save-hook`.  Triggered only for save actions from `save-buffer`."
+;;   (when (memq this-command '(save-buffer save-some-buffers))
+;;     (delete-trailing-whitespace)))
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; https://www.emacswiki.org/emacs/FillColumnIndicator
 (require 'fill-column-indicator)
 (setq fci-rule-column 80)
