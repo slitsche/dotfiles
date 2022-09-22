@@ -94,11 +94,11 @@
         ("n" "note" entry
          (file "inbox.org")
          "* %?\n%U"
-         :empty-lines-after 1)
+         :empty-lines-before 1)
         ("f" "folgezettel" entry
          (file "inbox.org")
          (function sli-zettel-template)
-         :empty-lines-after 1)
+         :empty-lines-before 1)
         ("o" "Orga" entry
          (file+headline "gtd.org" "Orga Stuff")
          "* DONE %^{Title}\nCLOSED: %U\n%?")
