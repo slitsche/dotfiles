@@ -86,6 +86,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (server-start)
 (tool-bar-mode 0)
+(menu-bar-mode 0)
 (auto-save-visited-mode 1)
 
 ;;https://www.masteringemacs.org/article/disabling-prompts-emacs
