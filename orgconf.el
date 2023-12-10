@@ -87,7 +87,8 @@
 (setq org-capture-templates
       '(("t" "Todo task inbox" entry
          (file "inbox.org")
-         "* TODO %?\n%U")
+         "* TODO %?\n%U"
+         :empty-lines-before 1)
         ("r" "read" entry
          (file "inbox.org")
          "* %? :READ:\n%U\n")
@@ -105,14 +106,17 @@
         ("c" "Consulting" entry
          (file+headline "gtd.org" "Consulting")
          "* MEET %^{Title}\nCLOSED: %U\n%?"
-         :clock-in t)
+         :clock-in t
+         :empty-lines-before 1)
         ("m" "Meeting" entry
          (file "inbox.org")
          "* MEET %^{Title}\nCLOSED: %U\n%?"
-         :clock-in t)
+         :clock-in t
+         :empty-lines-before 1)
         ("j" "Journal" entry
          (file "todo.org")
-         "* DONE %?\nCLOSED: %U")
+         "* DONE %?\nCLOSED: %U"
+         :empty-lines-before 1)
         ("e" "Event log" entry
          (file+datetree "notes/eventlog.org")
          "*** %?\n%U")
@@ -172,16 +176,20 @@
 
 (setq org-tag-alist '(
                       ("Boss" . ?b)
-                      ("CONS" . ?c)
+                      ("Claus" . ?c)
+                      ("petra" . ?d)
                       ("PE" . ?e)
                       ("Qst" . ?f)
+                      ("Goal" . ?g)
+                      ("hardik" . ?h)
                       ("Geld" . ?m)
-                      ("NOTE" . ?n)
+                      ("nuntius" . ?n)
                       ("ORGA" . ?o)
                       ("Proj" . ?p)
                       ("READ" . ?r)
-                      ("TEAM" . ?t)
-                      ("Goal" . ?g)))
+                      ("Sergio" . ?s)
+                      ("Waleed" . ?w)
+                      ))
 
 (setq org-tags-exclude-from-inheritance '("NOTE" "Proj"))
 

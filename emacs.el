@@ -1,7 +1,7 @@
 (require 'package)
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-;(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+;; (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
 ;; https://www.masteringemacs.org/article/what-is-new-in-emacs-24-part-2
@@ -328,22 +328,14 @@ If there is no plausible default, return nil."
 
 (load   "~/.emacs.d/orgconf.el")
 
-;; == Zettelkasten
-;; (add-to-list  'load-path  "/home/slitsche/.emacs.d/emacs-zettelkasten")
-;; (require 'zettelkasten)
-;; (zettelkasten-mode t)
-
-
-;; Deft work on files and shows results only file names
-;; (require 'deft)
-;; (setq deft-directory "~/Documents/org/notes")
-;; (setq deft-extensions '("org" "txt"))
-;; (setq deft-recursive t)
-
-
 ;;(load (xah-get-fullpath "sli-publish.el"))
 
 ;;; ============ Java =========
+
+(defun sli-java-mode-config ()
+  (setq-local tab-width 2))
+
+(add-hook 'java-mode-hook 'sli-java-mode-config)
 
 ;;  good read: http://www.goldsborough.me/emacs,/java/2016/02/24/22-54-16-setting_up_emacs_for_java_development/
 ;;; ============ LILYPOND  =========
@@ -371,8 +363,8 @@ If there is no plausible default, return nil."
 (setq calendar-location-name "Berlin, Germany")
 (setq calendar-latitude 52.52)
 (setq calendar-longitude 13.40)
-(require 'theme-changer)
-(change-theme 'dichromacy 'tsdh-dark)
+;; (require 'theme-changer)
+;; (change-theme 'dichromacy 'tsdh-dark)
 ;;
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -390,6 +382,7 @@ If there is no plausible default, return nil."
  '(browse-url-browser-function (quote browse-url-default-browser))
  '(custom-enabled-themes (quote (dichromacy)))
  '(helm-completion-style (quote helm))
+ '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
    (quote
-    (evil helm-org-ql org-ql evil-collection deft racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode cider org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile clojure-mode fill-column-indicator clj-refactor))))
+    (cider evil helm-org-ql org-ql evil-collection deft racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile fill-column-indicator))))
