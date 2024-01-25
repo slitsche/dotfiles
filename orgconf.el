@@ -32,11 +32,12 @@
 ;; in emacs 26 changing it requires restart
 (setq sli-notes-files '("~/Documents/org/notes.org"
                         "~/Documents/org/emacs.org"
-                        "~/Documents/org/notes/cassandra-training.org"
                         "~/Documents/org/projects.org"
                         "~/Documents/org/someday.org"
                         "~/Documents/org/notes/customer-inbox.org"
-                        "~/Documents/org/notes/segeln.org"))
+                        ;; "~/Documents/org/notes/cassandra-training.org"
+                        ;; "~/Documents/org/notes/segeln.org"
+                        ))
 
 ;; My daily work agenda
 (defun sli-work-agenda ()
@@ -175,6 +176,7 @@
                ((org-show-context-detail 'minimal))))))
 
 (setq org-tag-alist '(
+                      ("Alex" . ?a)
                       ("Boss" . ?b)
                       ("Claus" . ?c)
                       ("petra" . ?d)
