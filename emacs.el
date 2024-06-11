@@ -194,13 +194,14 @@ To solve this problem, when your code only knows the relative path of another fi
   (setq projectile-mode-line-function '(lambda () (format " Proj[%s]" (projectile-project-name))))
   (projectile-mode +1))
 
-;(require 'helm-projectile)
-;(helm-projectile-on)
-
 (use-package helm-projectile
   :config
   (helm-projectile-on))
+
 ;; ================== Clojure =================
+;; refactor is out of sync.  disable it for now
+;;(require 'clj-refactor)
+;;(setq cljr-inject-dependencies-at-jack-in t)
 (defun sli-find-tag-default-bounds ()
   "Determine the boundaries of the default tag, based on text at point.
 Return a cons cell with the beginning and end of the found tag.
@@ -229,7 +230,6 @@ If there is no plausible default, return nil."
                      (setq to (point)))))
       (cons from to))))
 
-(require 'clj-refactor)
 
 (defun sli-find-tag-clojure ()
   "Determine default tag to search for, based on text at point.
@@ -248,12 +248,13 @@ If there is no plausible default, return nil."
   (put-clojure-indent 'fact 1)
   (put-clojure-indent 'facts 1)
   ;;https://github.com/clojure-emacs/clj-refactor.el/wiki/installation
-  (clj-refactor-mode 1)
+  ;; (clj-refactor-mode 1)
   ;; for clojure we replace the evil binding for evil-jump-to-tag
   ;; which resolves a symbol with namespace
   ;;(define-key evil-motion-state-map (kbd "C-]") 'cider-find-var)
   (define-key (current-local-map) (kbd "<f5>") 'cider-find-var)
-  (yas/minor-mode 1))
+  ;;(yas/minor-mode 1)
+  )
 
 (add-hook 'clojure-mode-hook #'paredit-mode)
 (add-hook 'clojure-mode-hook #'sli-clojure-mode-init)
@@ -327,8 +328,6 @@ If there is no plausible default, return nil."
 ;;; ============ ORG ============
 
 (load   "~/.emacs.d/orgconf.el")
-
-;;(load (xah-get-fullpath "sli-publish.el"))
 
 ;;; ============ Java =========
 
