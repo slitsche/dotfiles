@@ -1,15 +1,11 @@
 (require 'package)
 
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-;; (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
 ;; https://www.masteringemacs.org/article/what-is-new-in-emacs-24-part-2
 (setq package-enable-at-startup nil)
 
 (package-install-selected-packages)
-
-(package-initialize)
 
 ;; https://github.com/jwiegley/use-package
 (eval-when-compile
@@ -118,13 +114,8 @@ To solve this problem, when your code only knows the relative path of another fi
 ;; (set-mark-command) I rarely use and it has a secondary binding C-@
 ;; so we can use one binding of this command.
 (global-set-key (kbd "C-SPC") #'company-complete)
-;; we replace switch-to-buffer with helm
-(global-set-key (kbd "C-x b") #'helm-mini)
 (defalias 'list-buffers 'ibuffer)
 
-;; Configure imenu via helm: lookup buffer contents
-;; The key binding is derived from Eclipse C-o
-(global-set-key (kbd "C-c o") 'helm-imenu)
 (setf imenu-auto-rescan t)
 
 ;; http://ergoemacs.org/emacs/emacs_highlight_parenthesis.html
@@ -135,9 +126,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
-;; key overrides default binding for find-files-read-only
-(global-set-key "\C-x\ \C-r" 'helm-recentf)
-(global-set-key "\C-x\ \C-f" 'helm-find-files)
+
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Whitepspace
@@ -171,8 +160,24 @@ To solve this problem, when your code only knows the relative path of another fi
 (add-hook 'prog-mode-hook 'fci-mode)
 (setq prog-mode-hook nil)
 ;; ================== Helm && Projectile =================
-(require 'helm-config)
-(helm-mode 1)
+(use-package helm
+  :bind (("M-x"     . helm-M-x)
+         ("C-x b"   . helm-mini) ;; replace switch-to-buffer
+         ("C-x C-f" . helm-find-files)
+         ("C-x C-d" . helm-browse-project)  ;; TODO: does this conflict with projectile?
+         ;; Configure imenu via helm: lookup buffer contents
+         ;; The key binding is derived from Eclipse C-o
+         ("C-c o"   . helm-imenu)
+         ;; key overrides default binding for find-files-read-only
+         ("C-x C-r" . helm-recentf)
+         ("M-y" . helm-show-kill-ring))
+  :config  (helm-mode 1)
+           (setq helm-M-x-fuzzy-match 1)
+           (setq helm-buffers-fuzzy-matching 1)
+           (setq helm-recentf-fuzzy-match 1)
+  )
+;; (require 'helm)
+;; (helm-mode 1)
 
 (use-package projectile
   :init
@@ -294,9 +299,6 @@ If there is no plausible default, return nil."
   (sql-set-product-feature 'postgres
                          :prompt-regexp "^[[:alnum:]_]*=[#>] "))
 
-;; ============= Racket ==============
-(use-package racket-mode
-             :ensure t)
 
 ;; ============= Lisp ==============
 (require 'slime)
@@ -316,8 +318,6 @@ If there is no plausible default, return nil."
 (setq python-shell-interpreter "ipython3"
       python-shell-interpreter-args "--simple-prompt -i")
 
-(require 'ein)
-(require 'ein-notebook)
 
 ;;; ============ Octave =========
 ;; useful for the ML cousera course
@@ -378,10 +378,11 @@ If there is no plausible default, return nil."
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
- '(browse-url-browser-function (quote browse-url-default-browser))
- '(custom-enabled-themes (quote (dichromacy)))
- '(helm-completion-style (quote helm))
+ '(browse-url-browser-function 'browse-url-default-browser)
+ '(custom-enabled-themes '(dichromacy))
+ '(helm-completion-style 'helm)
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   (quote
-    (num3-mode cider evil helm-org-ql org-ql evil-collection deft racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile fill-column-indicator))))
+   '(slime undo-tree magit gnu-elpa-keyring-update org-ql paredit company highlight-indentation helm-projectile projectile use-package racket-mode org-bullets fill-column-indicator evil-surround evil-collection))
+ '(package-selectpaged-packages
+   '(num3-mode cider evil helm-org-ql org-ql evil-collection deft racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile fill-column-indicator)))
