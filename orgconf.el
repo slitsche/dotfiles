@@ -20,6 +20,7 @@
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
 (setq org-catch-invisible-edits 'show-and-error)
+(setq org-startup-indented t)
 
 ;; Setup folder structure
 (setq org-directory "~/Documents/org")
@@ -267,5 +268,4 @@
 (add-hook 'org-shiftleft-final-hook 'windmove-left)
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
-(add-hook 'org-mode-hook 'org-indent-mode)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
