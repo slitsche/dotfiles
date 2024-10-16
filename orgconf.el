@@ -35,7 +35,7 @@
                         "~/Documents/org/emacs.org"
                         "~/Documents/org/projects.org"
                         "~/Documents/org/someday.org"
-                        "~/Documents/org/notes/customer-inbox.org"
+                        "~/Documents/org/notes/zeos-zfs.org"
                         ;; "~/Documents/org/notes/cassandra-training.org"
                         ;; "~/Documents/org/notes/segeln.org"
                         ))
@@ -179,19 +179,14 @@
 (setq org-tag-alist '(
                       ("Alex" . ?a)
                       ("Boss" . ?b)
-                      ("Claus" . ?c)
-                      ("petra" . ?d)
                       ("PE" . ?e)
                       ("Qst" . ?f)
                       ("Goal" . ?g)
-                      ("hardik" . ?h)
                       ("Geld" . ?m)
-                      ("nuntius" . ?n)
                       ("ORGA" . ?o)
                       ("Proj" . ?p)
                       ("READ" . ?r)
-                      ("Sergio" . ?s)
-                      ("Waleed" . ?w)
+                      ("Yaneeve" . ?y)
                       ))
 
 (setq org-tags-exclude-from-inheritance '("NOTE" "Proj"))
