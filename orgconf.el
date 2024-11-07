@@ -197,8 +197,6 @@
 
 (setq org-stuck-projects
       '("+Proj/-DONE" ("NEXT" "WAIT") nil nil))
-(add-to-list 'org-structure-template-alist
-             '("C" "#+BEGIN_COMMENT\n?\n#+END_COMMENT" "<!--?-->"))
 
 ;;https://blog.aaronbieber.com/2017/03/19/organizing-notes-with-refile.html
 ;; Make it possible to refile with helm
