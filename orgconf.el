@@ -27,6 +27,8 @@
 
 ;; Setup folder structure
 (setq org-directory "~/Documents/org")
+;; Allow to refile notes to files in subfolder
+(setq org-attach-directory org-directory)
 (setq org-agenda-files (list "~/Documents/org/gtd.org"
                              "~/Documents/org/todo.org"
                              "~/Documents/org/privat.org"
