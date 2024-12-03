@@ -383,6 +383,6 @@ If there is no plausible default, return nil."
  '(helm-completion-style 'helm)
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(slime undo-tree magit gnu-elpa-keyring-update org-ql paredit company highlight-indentation helm-projectile projectile use-package racket-mode org-bullets fill-column-indicator evil-surround evil-collection))
+   '(org-randomnote slime undo-tree magit gnu-elpa-keyring-update org-ql paredit company highlight-indentation helm-projectile projectile use-package racket-mode org-bullets fill-column-indicator evil-surround evil-collection))
  '(package-selectpaged-packages
    '(num3-mode cider evil helm-org-ql org-ql evil-collection deft racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile fill-column-indicator)))

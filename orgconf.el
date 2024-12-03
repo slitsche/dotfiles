@@ -9,6 +9,9 @@
 (require 'org-ql-view)
 ;; (require 'helm-org-ql)
 
+;;
+(use-package org-randomnote :ensure t :bind ("C-c r" . org-randomnote))
+
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 (setq org-todo-keywords
