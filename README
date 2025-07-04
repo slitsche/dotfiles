@@ -10,21 +10,7 @@ Create symlinks and configure git:
     ln -s ~/dotfiles/gpg.conf ~/.gnupg/gpg.conf
     git config --global core.excludesFile ~/dotfiles/gitignore_globa
 
-Switch to the `~/.vim` directory, and fetch submodules:
 
-    cd ~/.vim
-    git submodule init
-    git submodule update
 
-Add a new vim plugin
 
-    cd vim
-    git submodule add git@github.com:kien/rainbow_parentheses.vim.git bundle/rainbow_parentheses.vim
-
-Ubuntu 14.04 we need
-
-    sudo apt-get install vim-nox
-    sudo apt-get install ruby1.9.1-dev
-
-in order to get command-t installed
 
