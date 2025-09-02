@@ -148,7 +148,7 @@ To solve this problem, when your code only knows the relative path of another fi
 ;;   "Used in `before-save-hook`.  Triggered only for save actions from `save-buffer`."
 ;;   (when (memq this-command '(save-buffer save-some-buffers))
 ;;     (delete-trailing-whitespace)))
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; 2025-06-27 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; https://www.emacswiki.org/emacs/FillColumnIndicator
 (require 'fill-column-indicator)
@@ -158,7 +158,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (setq-default fill-column 80)
 (add-hook 'text-mode-hook 'auto-fill-mode)
 (add-hook 'prog-mode-hook 'fci-mode)
-(setq prog-mode-hook nil)
+
 ;; ================== Helm && Projectile =================
 (use-package helm
   :bind (("M-x"     . helm-M-x)
