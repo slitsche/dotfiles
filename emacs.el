@@ -1,11 +1,14 @@
 (require 'package)
 
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file 'noerror)
+
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(package-refresh-contents)
 
 ;; https://www.masteringemacs.org/article/what-is-new-in-emacs-24-part-2
 (setq package-enable-at-startup nil)
-
-(package-install-selected-packages)
+(package-install-selected-packages t)
 
 ;; https://github.com/jwiegley/use-package
 (eval-when-compile
@@ -23,7 +26,10 @@
 ;; (setq evil-move-cursor-back nil)
 
 ;; enable redo via C-r
-(global-undo-tree-mode)
+(use-package undo-tree
+  :ensure t
+  :init
+  (global-undo-tree-mode))
 
 (use-package evil
 :init
@@ -151,8 +157,10 @@ To solve this problem, when your code only knows the relative path of another fi
 ;; 2025-06-27 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; https://www.emacswiki.org/emacs/FillColumnIndicator
-(require 'fill-column-indicator)
-(setq fci-rule-column 80)
+(use-package fill-column-indicator
+  :ensure t
+  :init
+  (setq fci-rule-column 80))
 
 ;; fill-paragraph should adhere to this
 (setq-default fill-column 80)
@@ -161,6 +169,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;; ================== Helm && Projectile =================
 (use-package helm
+  :ensure t
   :bind (("M-x"     . helm-M-x)
          ("C-x b"   . helm-mini) ;; replace switch-to-buffer
          ("C-x C-f" . helm-find-files)
@@ -365,24 +374,3 @@ If there is no plausible default, return nil."
 ;; (require 'theme-changer)
 ;; (change-theme 'dichromacy 'tsdh-dark)
 ;;
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
- '(browse-url-browser-function 'browse-url-default-browser)
- '(custom-enabled-themes '(dichromacy))
- '(helm-completion-style 'helm)
- '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages
-   '(cider clojure-mode writegood-mode org-randomnote slime undo-tree magit gnu-elpa-keyring-update org-ql paredit company highlight-indentation helm-projectile projectile use-package racket-mode org-bullets fill-column-indicator evil-surround evil-collection))
- '(package-selectpaged-packages
-   '(num3-mode cider evil helm-org-ql org-ql evil-collection deft racket-mode magit-popup dash ein gnu-elpa-keyring-update highlight-indentation theme-changer paredit elfeed dimmer dockerfile-mode org-static-blog octave-mode evil-surround use-package elfeed org-edna htmlize auto-dim-other-buffers company yaml-mode slime org-bullets markdown-mode magit ibuffer projectile helm helm-projectile fill-column-indicator)))

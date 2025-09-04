@@ -10,6 +10,9 @@ Create symlinks and configure git:
     ln -s ~/dotfiles/gpg.conf ~/.gnupg/gpg.conf
     git config --global core.excludesFile ~/dotfiles/gitignore_globa
 
+Emacs
+
+    ln -s ~/work/oss/dotfiles/emacs.d/*.el ~/.emacs.d/
 
 
 
