@@ -310,11 +310,11 @@ If there is no plausible default, return nil."
 
 
 ;; ============= Lisp ==============
-;; (require 'slime)
-;; (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-;; (add-hook 'lisp-mode-hook 'paredit-mode)
-;; (setq inferior-lisp-program "/usr/local/bin/sbcl")
-;; (setq slime-contribs '(slime-fancy))
+(require 'slime)
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+(add-hook 'lisp-mode-hook 'paredit-mode)
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
+(setq slime-contribs '(slime-fancy))
 
 ;;; ============ Python ============
 (defun sli-python-mode-init ()

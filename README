@@ -1,19 +1,19 @@
 Installation:
 
-    git clone git://github.com/sli67/dotfiles.git ~/dotfiles
+    git clone git://github.com/slitsche/dotfiles.git ~/dotfiles
 
 Create symlinks and configure git:
 
-    ln -s ~/dotfiles/vimrc ~/.vimrc
-    ln -s ~/dotfiles/vim ~/.vim
-    ln -s ~/dotfiles/gvimrc ~/.gvimrc
-    ln -s ~/dotfiles/gpg.conf ~/.gnupg/gpg.conf
-    git config --global core.excludesFile ~/dotfiles/gitignore_globa
+    ln -s ~/work/oss/dotfiles/vimrc ~/.vimrc
+    ln -s ~/work/oss/dotfiles/vim ~/.vim
+    ln -s ~/work/oss/dotfiles/gvimrc ~/.gvimrc
+    ln -s ~/work/oss/dotfiles/gpg.conf ~/.gnupg/gpg.conf
+    git config --global core.excludesFile ~/dotfiles/gitignore_global
 
 Emacs
 
     ln -s ~/work/oss/dotfiles/emacs.d/*.el ~/.emacs.d/
 
-
+Ensure the global `.gitconfig` and the reference include files are restored in order to ensure the correct setting of user name and email.
 
 
