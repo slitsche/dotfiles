@@ -13,6 +13,7 @@ Create symlinks and configure git:
 Emacs
 
     ln -s ~/work/oss/dotfiles/emacs.d/*.el ~/.emacs.d/
+    ln -s ~/work/oss/dotfiles/ctags ~/.ctags
 
 Ensure the global `.gitconfig` and the reference include files are restored in order to ensure the correct setting of user name and email.
 

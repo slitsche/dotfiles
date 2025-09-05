@@ -1,16 +1,8 @@
 
 ;;; ============ ORG ============
-(require 'org)
-(require 'org-bullets)
-(require 'org-id)
-(require 'org-datetree)
-(require 'ob-clojure)
-(require 'org-ql)
-(require 'org-ql-view)
-;; (require 'helm-org-ql)
-
 ;;
-(use-package org-randomnote :ensure t :bind ("C-c r" . org-randomnote))
+(use-package org-randomnote
+  :bind ("C-c r" . org-randomnote))
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 

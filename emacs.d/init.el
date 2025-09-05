@@ -1,13 +1,8 @@
-(require 'package)
-
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-refresh-contents)
-
-;; https://www.masteringemacs.org/article/what-is-new-in-emacs-24-part-2
-(setq package-enable-at-startup nil)
 (package-install-selected-packages t)
 
 ;; https://github.com/jwiegley/use-package
@@ -27,7 +22,6 @@
 
 ;; enable redo via C-r
 (use-package undo-tree
-  :ensure t
   :init
   (global-undo-tree-mode))
 
@@ -49,17 +43,14 @@
   (add-to-list 'evil-emacs-state-modes 'elfeed-search-mode)
   (add-to-list 'evil-emacs-state-modes 'info-mode)
   ;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
-  (fset 'evil-visual-update-x-selection 'ignore)
-  ))
+  (fset 'evil-visual-update-x-selection 'ignore)))
 
 (use-package evil-collection
     :after evil
-    :ensure t
     :config
     (evil-collection-init))
 
 (use-package evil-surround
-  :ensure t
   :config
   (global-evil-surround-mode 1))
 
@@ -129,15 +120,13 @@ To solve this problem, when your code only knows the relative path of another fi
 (setq show-paren-style 'expression)
 
 ;; https://www.emacswiki.org/emacs/RecentFiles
-(require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Whitepspace
-(require 'whitespace)
-;Toggle whitespace visualization.
+; Toggle whitespace visualization.
 (global-whitespace-mode 1)
 (setq whitespace-style (quote
    ( face trailing tabs newline tab-mark ))) ;newline-mark
@@ -158,7 +147,6 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;; https://www.emacswiki.org/emacs/FillColumnIndicator
 (use-package fill-column-indicator
-  :ensure t
   :init
   (setq fci-rule-column 80))
 
@@ -169,7 +157,6 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;; ================== Helm && Projectile =================
 (use-package helm
-  :ensure t
   :bind (("M-x"     . helm-M-x)
          ("C-x b"   . helm-mini) ;; replace switch-to-buffer
          ("C-x C-f" . helm-find-files)
@@ -185,8 +172,6 @@ To solve this problem, when your code only knows the relative path of another fi
            (setq helm-buffers-fuzzy-matching 1)
            (setq helm-recentf-fuzzy-match 1)
   )
-;; (require 'helm)
-;; (helm-mode 1)
 
 (use-package projectile
   :init
@@ -214,7 +199,6 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;; ================== Clojure =================
 ;; refactor is out of sync.  disable it for now
-;;(require 'clj-refactor)
 ;;(setq cljr-inject-dependencies-at-jack-in t)
 (defun sli-find-tag-default-bounds ()
   "Determine the boundaries of the default tag, based on text at point.
@@ -310,7 +294,6 @@ If there is no plausible default, return nil."
 
 
 ;; ============= Lisp ==============
-(require 'slime)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'lisp-mode-hook 'paredit-mode)
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
@@ -371,6 +354,3 @@ If there is no plausible default, return nil."
 (setq calendar-location-name "Berlin, Germany")
 (setq calendar-latitude 52.52)
 (setq calendar-longitude 13.40)
-;; (require 'theme-changer)
-;; (change-theme 'dichromacy 'tsdh-dark)
-;;
