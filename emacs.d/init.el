@@ -45,6 +45,7 @@
   ;; http://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard/15054#15054
   (fset 'evil-visual-update-x-selection 'ignore)))
 
+;; Support evil movements for non-standard buffers or modes (e.g. magit mode)
 (use-package evil-collection
     :after evil
     :config
@@ -101,7 +102,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (global-hl-line-mode 1)
 ;; Please avoid tabs
 (setq-default indent-tabs-mode nil)
-(set-face-attribute 'default nil :height 140)
+(set-face-attribute 'default nil :height 120)
 ;; make auto complete always available
 (add-hook 'after-init-hook 'global-company-mode)
 ;; I prefer manual triggered completion
