@@ -37,11 +37,6 @@
                         ;; "~/Documents/org/notes/segeln.org"
                         ))
 
-;; My daily work agenda
-(defun sli-work-agenda ()
-  (interactive)
-  (org-agenda nil "w"))
-
 ;; Define a set of different files
 (setq sli-work-agenda
       (seq-remove (lambda (x) (string-match "privat" x))
@@ -181,10 +176,12 @@
                       ("Goal" . ?g)
                       ("Geld" . ?m)
                       ("ORGA" . ?o)
-                      ("Proj" . ?j)
-                      ("Prod" . ?p)
+                      ("Proj" . ?p)
+                      ("Jumana" . ?j)
                       ("READ" . ?r)
+                      ("Shenal" . ?s)
                       ("Yaneeve" . ?y)
+                      ("Yogi" . ?i)
                       ))
 
 (setq org-tags-exclude-from-inheritance '("NOTE" "Proj"))
@@ -213,14 +210,6 @@
      (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
    "/DONE" 'file))
 
-(defun sli-report-worklog ()
-  "Report on all consulting actions from worklog"
-  (interactive)
-  (message
-   (format "Consultings: %d"
-           (length
-            (org-map-entries t "CONS" 'tree)))))
-
 (defun sli-read-datetree-date (d)
   "Parse a time string D and return a date to pass to the datetree functions."
   (let ((dtmp (nthcdr 3 (parse-time-string d))))
@@ -248,6 +237,11 @@
    ;;(sh . t)
    (emacs-lisp . t)
    (clojure . t)))
+
+;; My daily work agenda
+(defun sli-work-agenda ()
+  (interactive)
+  (org-agenda nil "w"))
 
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
