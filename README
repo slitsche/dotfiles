@@ -8,7 +8,7 @@ Create symlinks and configure git:
     ln -s ~/work/oss/dotfiles/vim ~/.vim
     ln -s ~/work/oss/dotfiles/gvimrc ~/.gvimrc
     ln -s ~/work/oss/dotfiles/gpg.conf ~/.gnupg/gpg.conf
-    git config --global core.excludesFile ~/dotfiles/gitignore_global
+    git config --global core.excludesFile ~/work/oss/dotfiles/gitignore_global
 
 Emacs
 

@@ -4,6 +4,7 @@
 (use-package org-randomnote
   :bind ("C-c r" . org-randomnote))
 
+;; TODO isn't that the default?
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 (setq org-todo-keywords
@@ -32,10 +33,7 @@
                         "~/Documents/org/emacs.org"
                         "~/Documents/org/projects.org"
                         "~/Documents/org/someday.org"
-                        "~/Documents/org/notes/zeos-zfs.org"
-                        ;; "~/Documents/org/notes/cassandra-training.org"
-                        ;; "~/Documents/org/notes/segeln.org"
-                        ))
+                        "~/Documents/org/notes/zeos-zfs.org"))
 
 ;; Define a set of different files
 (setq sli-work-agenda
@@ -70,11 +68,8 @@
   (let* ((id (org-entry-get (point) "ID"))
          (query (cond (id `(link :target ,(concat "id:" id )))
                       (t (error "Entry has no ID property"))))
-         ;; (helm-query (concat "link:target=" (concat "\"" "id:" id "\"")))
          (title (concat "Links to: " (org-get-heading t t)))
          (org-agenda-tag-filter nil))
-    ;; (message helm-query)
-    ;; (helm-org-ql sli-notes-files :name helm-query)
     (org-ql-search (append sli-work-agenda sli-notes-files) query :title title)))
 
 ;https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
@@ -94,10 +89,7 @@
          (file "inbox.org")
          (function sli-zettel-template)
          :empty-lines-before 1)
-        ("o" "Orga" entry
-         (file+headline "gtd.org" "Orga Stuff")
-         "* DONE %^{Title}\nCLOSED: %U\n%?")
-        ("c" "Consulting" entry
+        ("c" "Consulting" entry ;; TODO 2026-02-22 still in use?
          (file+headline "gtd.org" "Consulting")
          "* MEET %^{Title}\nCLOSED: %U\n%?"
          :clock-in t
@@ -117,10 +109,7 @@
         ("h" "Health" entry
          (file+datetree "no-agenda/health.org")
          "*** %?\n%U")
-        ("s" "Segeln" entry
-         (file+headline "notes/segeln.org" "Zettels")
-         (function sli-zettel-template)
-         :empty-lines 1)))
+        ))
 
 ;; http://doc.norang.ca/org-mode.html#CustomAgendaViews
 ;; https://emacs.stackexchange.com/questions/12517/how-do-i-make-the-timespan-shown-by-org-agenda-start-yesterday
@@ -181,10 +170,7 @@
                       ("READ" . ?r)
                       ("Shenal" . ?s)
                       ("Yaneeve" . ?y)
-                      ("Yogi" . ?i)
-                      ))
-
-(setq org-tags-exclude-from-inheritance '("NOTE" "Proj"))
+                      ("Yogi" . ?i)))
 
 (setq org-sort-agenda-noeffort-is-high nil)
 (setq org-global-properties

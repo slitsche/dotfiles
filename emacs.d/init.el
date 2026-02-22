@@ -82,6 +82,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (auto-save-visited-mode 1)
+(setq calendar-week-start-day 1)
 
 ;;https://www.masteringemacs.org/article/disabling-prompts-emacs
 (fset 'yes-or-no-p 'y-or-n-p)
