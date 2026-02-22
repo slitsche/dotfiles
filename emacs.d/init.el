@@ -126,6 +126,7 @@ To solve this problem, when your code only knows the relative path of another fi
 (setq recentf-max-menu-items 25)
 
 (global-set-key (kbd "C-x g") 'magit-status)
+(global-visual-line-mode 1)
 
 ;; Whitepspace
 ; Toggle whitespace visualization.
@@ -154,7 +155,7 @@ To solve this problem, when your code only knows the relative path of another fi
 
 ;; fill-paragraph should adhere to this
 (setq-default fill-column 80)
-(add-hook 'text-mode-hook 'auto-fill-mode)
+;; (add-hook 'text-mode-hook 'auto-fill-mode)
 (add-hook 'prog-mode-hook 'fci-mode)
 
 ;; ================== Helm && Projectile =================
