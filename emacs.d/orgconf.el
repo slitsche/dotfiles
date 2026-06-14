@@ -21,10 +21,10 @@
 ;; Setup folder structure
 (setq org-directory "~/Documents/org")
 ;; Allow to refile notes to files in subfolder
-(setq org-attach-directory org-directory)
-(setq org-agenda-files (list "~/Documents/org/gtd.org"
+;; (setq org-attach-directory (file-name-concat org-directory "attach"))
+(setq org-attach-id-dir "attach")
+(setq sli-work-files (list "~/Documents/org/gtd.org"
                              "~/Documents/org/todo.org"
-                             "~/Documents/org/privat.org"
                              "~/Documents/org/inbox.org"
                              "~/Documents/org/networking.org"))
 
@@ -33,9 +33,28 @@
                         "~/Documents/org/emacs.org"
                         "~/Documents/org/projects.org"
                         "~/Documents/org/someday.org"
-                        "~/Documents/org/notes/zeos-zfs.org"))
+                        "~/Documents/org/notes/zeos-zfs.org"
+                        "~/Documents/org/personal.org"
+                        "~/Documents/org/p_inbox.org"
+                        "~/Documents/org/privat.org"))
+
+;; (setq sli-personal-notes-files '("~/Documents/org/personal.org"
+;;                                  "~/Documents/org/p_inbox.org"
+;;                                  "~/Documents/org/privat.org"))
+
+(defun sli-context-work ()
+  (interactive)
+  (setq org-agenda-files sli-work-files)
+  (message "Context WORK"))
+(defun sli-context-personal ()
+  (interactive)
+  (setq org-agenda-files sli-personal-notes-files)
+  (message "Context PERSONAL"))
+
+(sli-context-work)
 
 ;; Define a set of different files
+;; TODO Remove after having the context switch implemented
 (setq sli-work-agenda
       (seq-remove (lambda (x) (string-match "privat" x))
                   org-agenda-files))
@@ -70,7 +89,7 @@
                       (t (error "Entry has no ID property"))))
          (title (concat "Links to: " (org-get-heading t t)))
          (org-agenda-tag-filter nil))
-    (org-ql-search (append sli-work-agenda sli-notes-files) query :title title)))
+    (org-ql-search (append org-agenda-files sli-notes-files) query :title title)))
 
 ;https://blog.aaronbieber.com/2016/01/30/dig-into-org-mode.html
 (setq org-capture-templates
