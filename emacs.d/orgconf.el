@@ -35,11 +35,9 @@
                         "~/Documents/org/someday.org"
                         "~/Documents/org/notes/zeos-zfs.org"
                         "~/Documents/org/personal.org"
-                        "~/Documents/org/p_inbox.org"
                         "~/Documents/org/privat.org"))
 
 ;; (setq sli-personal-notes-files '("~/Documents/org/personal.org"
-;;                                  "~/Documents/org/p_inbox.org"
 ;;                                  "~/Documents/org/privat.org"))
 
 (defun sli-context-work ()
@@ -97,9 +95,6 @@
          (file "inbox.org")
          "* TODO %?\n%U"
          :empty-lines-before 1)
-        ("r" "read" entry
-         (file "inbox.org")
-         "* %? :READ:\n%U\n")
         ("n" "note" entry
          (file "inbox.org")
          "* %?\n%U"
@@ -188,6 +183,7 @@
                       ("Jumana" . ?j)
                       ("READ" . ?r)
                       ("Shenal" . ?s)
+                      ("Write" . ?w)
                       ("Yaneeve" . ?y)
                       ("Yogi" . ?i)))
 
