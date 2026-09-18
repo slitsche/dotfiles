@@ -178,23 +178,28 @@ To solve this problem, when your code only knows the relative path of another fi
 
 (use-package projectile
   :init
-  (setq projectile-keymap-prefix (kbd "C-c p"))
+      (setq projectile-keymap-prefix (kbd "C-c p"))
   :config
-  (setq projectile-enable-caching t)
-  ;; automatically regenerate the tags
-  ;; (setq projectile-enable-idle-timer t)
-  (setq projectile-create-missing-test-files t)
-  ;; Addressing issue for sbt: https://github.com/bbatsov/projectile/issues/1650
-  (projectile-update-project-type
-     'sbt
-     :src-dir
-     (lambda (file-path) (projectile-complementary-dir file-path "test" "main"))
-     :test-dir
-     (lambda (file-path) (projectile-complementary-dir file-path "main" "test")))
-  (setq projectile-mode-line-prefix "P")
-  ;(setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
-  (setq projectile-mode-line-function '(lambda () (format " Proj[%s]" (projectile-project-name))))
-  (projectile-mode +1))
+      (setq projectile-enable-caching t)
+      (setq projectile-tags-backend 'xref)
+      ;; automatically regenerate the tags
+      ;; (setq projectile-enable-idle-timer t)
+      ;; etags-select-tag cannot be found, seems outdated? With xref we rely now on etags
+      ;; xref is also the upcoming default for projectiles next version
+      (etags-regen-mode)
+      (setq projectile-create-missing-test-files t)
+      ;; Addressing issue for sbt: https://github.com/bbatsov/projectile/issues/1650
+      (projectile-update-project-type
+         'sbt
+         :src-dir
+         (lambda (file-path) (projectile-complementary-dir file-path "test" "main"))
+         :test-dir
+         (lambda (file-path) (projectile-complementary-dir file-path "main" "test")))
+      (setq projectile-mode-line-prefix "P")
+      ;(setq projectile-mode-line '(:eval (format " P[%s]" (projectile-project-name))))
+      (setq projectile-mode-line-function
+            '(lambda () (format " Proj[%s]" (projectile-project-name))))
+      (projectile-mode +1))
 
 (use-package helm-projectile
   :config
